@@ -1,0 +1,18 @@
+map ; :
+map D :tabc<cr>
+unmap d
+hi -a Hint font-size: 16pt !important
+set showtabline=never
+nmap -builtin j 10j
+nmap -builtin k 10k
+"" w/e switch tabs
+nmap -builtin w <C-p>
+nmap -builtin e <C-n>
+"" back/forward
+nmap -builtin h <C-o>
+nmap -builtin l <C-i>
+"" U list closed tabs
+nmap -builtin U :undo<Space>
+"" press tab to begin completion of :open :tabopen cmd
+set autocomplete=!/ex/(tab)?open,.?
+"" }}}
