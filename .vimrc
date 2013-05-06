@@ -1,6 +1,20 @@
-filetype on
+"VUNDLE CONFIG DO NOT CHANGE
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+filetype plugin indent on 
+"END VUNDLE SETUP
+Bundle 'kien/ctrlp.vim'
+
 au FileType c,cpp,java set cindent
 let mapleader = ","
+
+"disable arrows
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 
 "CamelCase movement in visual and insert
 set foldmethod=syntax
