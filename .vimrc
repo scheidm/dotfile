@@ -9,16 +9,16 @@ set foldlevel=1
 
 "nnoremap <C-Left> :call search('\<\<Bar>\u', 'bW')<CR>
 "nnoremap <C-Right> :call search('\<\<Bar>\u', 'W')<CR>
-inoremap <C-Left> <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
-inoremap <C-Right> <C-o>:call search('\<\<Bar>\u', 'W')<CR>
+inoremap <Leader>h <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
+inoremap <Leader>l <C-o>:call search('\<\<Bar>\u', 'W')<CR>
 "vnoremap <C-Left> <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
 "vnoremap <C-Right> <C-o>:call search('\<\<Bar>\u', 'W')<CR>
 
 "Directional movement between buffers
-nnoremap <silent> <C-Right> <c-w>l
-nnoremap <silent> <C-Left> <c-w>h
-nnoremap <silent> <C-Up> <c-w>k
-nnoremap <silent> <C-Down> <c-w>j
+nnoremap <silent> <C-l> <c-w>l
+nnoremap <silent> <C-h> <c-w>h
+nnoremap <silent> <C-k> <c-w>k
+nnoremap <silent> <C-j> <c-w>j
 
 
 set nocompatible
