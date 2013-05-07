@@ -1,3 +1,4 @@
+set shellcmdflag=-c
 "VUNDLE CONFIG DO NOT CHANGE
 filetype off
 set rtp+=~/.vim/bundle/vundle/
@@ -10,10 +11,13 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/sudo.vim'
 Bundle 'skalnik/vim-vroom'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/powerline'
+Bundle 'tpope/vim-fugitive'
+"Powerline setup
+"Bundle 'Lokaltog/powerline'
+"set rtp+={repository_root}/powerline/bindings/vim
 
 au FileType c,cpp,java set cindent
-let mapeader = ","
+let mapleader = ","
 
 "disable arrows
 noremap <Up> <NOP>
@@ -25,35 +29,12 @@ noremap <Right> <NOP>
 set foldmethod=syntax
 set foldcolumn=3
 set foldlevel=1
-
-"nnoremap <C-Left> :call search('\<\<Bar>\u', 'bW')<CR>
-"nnoremap <C-Right> :call search('\<\<Bar>\u', 'W')<CR>
-inoremap <Leader>h <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
-inoremap <Leader>l <C-o>:call search('\<\<Bar>\u', 'W')<CR>
-"vnoremap <C-Left> <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
-"vnoremap <C-Right> <C-o>:call search('\<\<Bar>\u', 'W')<CR>
-
-"Directional movement between buffers
-nnoremap <silent> <C-l> <c-w>l
-nnoremap <silent> <C-h> <c-w>h
-nnoremap <silent> <C-k> <c-w>k
-nnoremap <silent> <C-j> <c-w>j
-
-
 set nocompatible
 set guifont=Lucida_console:h12:cANSI
 syntax enable
 colorscheme pablo
 
-map <Leader>y :.w !pbcopy<cr><cr>
-vmap <Leader>y :w !pbcopy<cr><cr>
-vmap <Leader>p ;call PP()<cr>
-map <Leader>p ;call PP()<cr>
-function! PP()
-  set paste
-  .!pbpaste
-  set nopaste
-endfunction
+
 "compile function
 function!  CC()
 	let fName=expand("%:r")
@@ -70,16 +51,44 @@ function! XX()
   winc j
 endfunction
 map mm ;call XX()<cr>
+"nnoremap <C-Left> :call search('\<\<Bar>\u', 'bW')<CR>
+"nnoremap <C-Right> :call search('\<\<Bar>\u', 'W')<CR>
+inoremap <Leader>h <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
+inoremap <Leader>l <C-o>:call search('\<\<Bar>\u', 'W')<CR>
+"vnoremap <C-Left> <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
+"vnoremap <C-Right> <C-o>:call search('\<\<Bar>\u', 'W')<CR>
+
+"Directional movement between buffers
+nnoremap <silent> <C-l> <c-w>l
+nnoremap <silent> <C-h> <c-w>h
+nnoremap <silent> <C-k> <c-w>k
+nnoremap <silent> <C-j> <c-w>j
+
+map <Leader>y :.w !pbcopy<cr><cr>
+vmap <Leader>y :w !pbcopy<cr><cr>
+vmap <Leader>p ;call PP()<cr>
+map <Leader>p ;call PP()<cr>
+function! PP()
+  set paste
+  .!pbpaste
+  set nopaste
+endfunction
+
+"quick config
+map <Leader>v ;tabnew ~/.vimrc<cr>
+map <Leader>b ;tabnew ~/.bash_profile<cr>
+map <Leader>V ;source $MYVIMRC<cr>
+map <Leader>B ;!source ~/.bash_profile<cr>
 
 map tt /tags="\(\S*\s*)*
-inoremap jj <Esc>
-nnoremap JJJJ <Nop>
-highlight matchParen ctermbg=4
 
 "nnoremap : ;
 nnoremap ; :
 "vnoremap : ;
 vnoremap ; :
+inoremap jj <Esc>
+nnoremap JJJJ <Nop>
+highlight matchParen ctermbg=4
 
 set smartindent
 set autoindent

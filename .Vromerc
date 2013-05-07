@@ -1,5 +1,0 @@
-map ; :
-map k 10k
-map j 10j
-map w <C-p>
-map e <C-n>
