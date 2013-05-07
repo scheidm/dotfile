@@ -1,4 +1,5 @@
-set shellcmdflag=-c
+set shellcmdflag=-Iic
+set shell=/bin/bash\ --rcfile\ ~/.bash_profile
 "VUNDLE CONFIG DO NOT CHANGE
 filetype off
 set rtp+=~/.vim/bundle/vundle/

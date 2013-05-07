@@ -17,7 +17,16 @@ alias tux="ssh mrs642@tux.cs.drexel.edu"
 alias composed="ssh selfforg@wellcomposed.net"
 alias ff="/Applications/Firefox.app/Contents/MacOS/firefox -p -no-remote"
 alias fft="/Applications/Firefox.app/Contents/MacOS/firefox -p \"elocal\" -no-remote"
-alias dots="cp ~/.bash_profile ~/dotfile;cp ~/.vimrc ~/dotfile;git --git-dir=/Users/mscheid/dotfile/.git commit $1"
+alias dots="cp ~/.pentadactylrc ~/dotfile;cp ~/.Vromerc ~/dotfile;cp ~/.bash_profile ~/dotfile;cp ~/.vimrc ~/dotfile;git --git-dir=/Users/mscheid/dotfile/.git commit -am $1"
+alias dotu=" git --git-dir=/Users/mscheid/dotfile/.git push origin master;"
+alias bs="source ~/.bash_profile"
+
+#Git config
+alias gg="git grep $1"
+alias gu="git push origin $1"
+alias gd="git pull origin $1"
+alias gc="git commit $1"
+alias gs="git status"
 
 TUX="mrs642@tux.cs.drexel.edu"
 #if [ -z "$STY" ]; then
@@ -29,9 +38,3 @@ alias down="scp $LWC:~/py/code/* ./"
 source ~/.rvm/scripts/rvm
 
 function echo_and_run() { echo "$@" ;"$@";}
-#Git config
-alias gg="git grep $1"
-alias gu="git push origin $1"
-alias gd="git pull origin $1"
-alias gc="git commit $1"
-alias gs="git status"
