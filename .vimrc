@@ -5,10 +5,15 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 filetype plugin indent on 
 "END VUNDLE SETUP
+
 Bundle 'kien/ctrlp.vim'
+Bundle 'vim-scripts/sudo.vim'
+Bundle 'skalnik/vim-vroom'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/powerline'
 
 au FileType c,cpp,java set cindent
-let mapleader = ","
+let mapeader = ","
 
 "disable arrows
 noremap <Up> <NOP>
