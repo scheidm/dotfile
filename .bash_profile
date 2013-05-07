@@ -1,6 +1,3 @@
-#PATH=${PATH}:"/cygdrive/C/Program Files/Java/jdk1.7.0_04/bin"
-#PATH=${PATH}:"/Applications/Postgres.app/Contents/MacOS/bin"
-#PATH=${PATH}:"/cygdrive/C/Program Files/Java/apache-ant-1.8.4/bin"
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:./bin
 export PATH
