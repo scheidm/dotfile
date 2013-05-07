@@ -17,6 +17,7 @@ alias fft="/Applications/Firefox.app/Contents/MacOS/firefox -p \"elocal\" -no-re
 alias dotc="cp ~/.pentadactylrc ~/dotfile;cp ~/.Vromerc ~/dotfile;cp ~/.bash_profile ~/dotfile;cp ~/.vimrc ~/dotfile;git --git-dir=/Users/mscheid/dotfile/.git commit -am $1"
 alias dotu=" git --git-dir=/Users/mscheid/dotfile/.git push origin master;"
 alias bs="source ~/.bash_profile"
+alias be="vim ~/.bash_profile"
 
 #Git config
 alias gg="git grep $1"

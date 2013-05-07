@@ -1,5 +1,6 @@
 set shellcmdflag=-Iic
 set shell=/bin/bash\ --rcfile\ ~/.bash_profile
+
 "VUNDLE CONFIG DO NOT CHANGE
 filetype off
 set rtp+=~/.vim/bundle/vundle/
@@ -13,7 +14,12 @@ Bundle 'vim-scripts/sudo.vim'
 Bundle 'skalnik/vim-vroom'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/syntastic'
+Bundle 'Lokaltog/vim-powerline'
 "Powerline setup
+set nocompatible " Disable vi-compatibility
+set laststatus=2 " Always show the statusline
+set encoding=utf-8 " Necessary to show Unicode glyphs
 "Bundle 'Lokaltog/powerline'
 "set rtp+={repository_root}/powerline/bindings/vim
 
@@ -26,10 +32,9 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-"CamelCase movement in visual and insert
 set foldmethod=syntax
 set foldcolumn=3
-set foldlevel=1
+"set foldlevel=1
 set nocompatible
 set guifont=Lucida_console:h12:cANSI
 syntax enable
@@ -52,6 +57,8 @@ function! XX()
   winc j
 endfunction
 map mm ;call XX()<cr>
+
+"CamelCase movement in visual and insert
 "nnoremap <C-Left> :call search('\<\<Bar>\u', 'bW')<CR>
 "nnoremap <C-Right> :call search('\<\<Bar>\u', 'W')<CR>
 inoremap <Leader>h <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
