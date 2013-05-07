@@ -17,9 +17,8 @@ alias tux="ssh mrs642@tux.cs.drexel.edu"
 alias composed="ssh selfforg@wellcomposed.net"
 alias ff="/Applications/Firefox.app/Contents/MacOS/firefox -p -no-remote"
 alias fft="/Applications/Firefox.app/Contents/MacOS/firefox -p \"elocal\" -no-remote"
-alias dotc="cp ~/.pentadactylrc ~/dotfile;cp ~/.Vromerc ~/dotfile;cp ~/.bash_profile ~/dotfile;cp ~/.vimrc ~/dotfile;git --git-dir=/Users/mscheid/dotfile/.git commit -am $0"
+alias dotc="cp ~/.pentadactylrc ~/dotfile;cp ~/.Vromerc ~/dotfile;cp ~/.bash_profile ~/dotfile;cp ~/.vimrc ~/dotfile;git --git-dir=/Users/mscheid/dotfile/.git commit -am $1"
 alias dotu=" git --git-dir=/Users/mscheid/dotfile/.git push origin master;"
-alias dots="dotc&&dotu"
 alias bs="source ~/.bash_profile"
 
 #Git config
