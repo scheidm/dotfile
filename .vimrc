@@ -27,6 +27,10 @@ au FileType c,cpp,java set cindent
 let mapleader = ","
 
 "disable arrows
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
@@ -34,7 +38,8 @@ noremap <Right> <NOP>
 
 set foldmethod=syntax
 set foldcolumn=3
-"set foldlevel=1
+set foldlevel=6
+set foldnestmax=5
 set nocompatible
 set guifont=Lucida_console:h12:cANSI
 syntax enable
@@ -56,24 +61,29 @@ function! XX()
   winc l
   winc j
 endfunction
-map mm ;call XX()<cr>
+map M ;call XX()<cr>
 
 "CamelCase movement in visual and insert
 "nnoremap <C-Left> :call search('\<\<Bar>\u', 'bW')<CR>
 "nnoremap <C-Right> :call search('\<\<Bar>\u', 'W')<CR>
-inoremap <Leader>h <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
-inoremap <Leader>l <C-o>:call search('\<\<Bar>\u', 'W')<CR>
+"inoremap <Leader>h <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
+"inoremap <Leader>l <C-o>:call search('\<\<Bar>\u', 'W')<CR>
 "vnoremap <C-Left> <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
 "vnoremap <C-Right> <C-o>:call search('\<\<Bar>\u', 'W')<CR>
 
 "Directional movement between buffers
-nnoremap <silent> <C-l> <c-w>l
-nnoremap <silent> <C-h> <c-w>h
-nnoremap <silent> <C-k> <c-w>k
-nnoremap <silent> <C-j> <c-w>j
+nnoremap <silent> <Leader>l <c-w>l
+nnoremap <silent> <Leader>h <c-w>h
+nnoremap <silent> <Leader>k <c-w>k
+nnoremap <silent> <Leader>j <c-w>j
+"Net-hack directional movement between buffers
+nnoremap <silent> <Leader>y <c-w>k<c-w>h
+nnoremap <silent> <Leader>u <c-w>k<c-w>l
+nnoremap <silent> <Leader>b <c-w>j<c-w>h
+nnoremap <silent> <Leader>n <c-w>j<c-w>l
 
-map <Leader>y :.w !pbcopy<cr><cr>
-vmap <Leader>y :w !pbcopy<cr><cr>
+map <Leader>Y :.w !pbcopy<cr><cr>
+vmap <Leader>Y :w !pbcopy<cr><cr>
 vmap <Leader>p ;call PP()<cr>
 map <Leader>p ;call PP()<cr>
 function! PP()
@@ -84,9 +94,7 @@ endfunction
 
 "quick config
 map <Leader>v ;tabnew ~/.vimrc<cr>
-map <Leader>b ;tabnew ~/.bash_profile<cr>
 map <Leader>V ;source $MYVIMRC<cr>
-map <Leader>B ;!source ~/.bash_profile<cr>
 
 map tt /tags="\(\S*\s*)*
 
