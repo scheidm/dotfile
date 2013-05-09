@@ -112,6 +112,7 @@ set autoindent
 map j gj
 map k gk
 
+map <Leader>D ;mapclear<cr>:map <Leader>V :source $MYVIMRC<cr>
 "backup options
 "set backupdir=~/temp
 "`set backup
