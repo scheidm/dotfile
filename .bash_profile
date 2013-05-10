@@ -26,6 +26,10 @@ alias gd="git pull origin $1"
 alias gc="git commit $1"
 alias gs="git status"
 alias ga="git add"
+alias gl="git log"
+alias gco="git checkout"
+alias gr="git reset"
+alias grl="git reflog"
 
 TUX="mrs642@tux.cs.drexel.edu"
 #if [ -z "$STY" ]; then

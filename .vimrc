@@ -41,7 +41,7 @@ set foldcolumn=3
 set foldlevel=6
 set foldnestmax=5
 set nocompatible
-set guifont=Lucida_console:h12:cANSI
+set guifont=Lucida_console:h12:CANSI
 syntax enable
 colorscheme pablo
 
@@ -49,8 +49,8 @@ colorscheme pablo
 "compile function
 function!  CC()
 	let fName=expand("%:r")
-	exe ":!g++ " . fName . ".cpp -o " . fName . ".run"
-	exe ":!" . fName . ".run"
+	exe ";!g++ " . fName . ".cpp -o " . fName . ".run"
+	exe ";!" . fName . ".run"
 endfunction
 "4 way split
 function! XX()
@@ -61,15 +61,18 @@ function! XX()
   winc l
   winc j
 endfunction
-map M ;call XX()<cr>
+
+"Custom maps"
+nmap <C-x> ;call XX()<cr>
+map <Leader>t ;tabnew<cr>;e 
 
 "CamelCase movement in visual and insert
-"nnoremap <C-Left> :call search('\<\<Bar>\u', 'bW')<CR>
-"nnoremap <C-Right> :call search('\<\<Bar>\u', 'W')<CR>
-"inoremap <Leader>h <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
-"inoremap <Leader>l <C-o>:call search('\<\<Bar>\u', 'W')<CR>
-"vnoremap <C-Left> <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
-"vnoremap <C-Right> <C-o>:call search('\<\<Bar>\u', 'W')<CR>
+"nnoremap <C-Left> ;call search('\<\<Bar>\u', 'bW')<CR>
+"nnoremap <C-Right> ;call search('\<\<Bar>\u', 'W')<CR>
+"inoremap <Leader>h <C-o>;call search('\<\<Bar>\u', 'bW')<CR>
+"inoremap <Leader>l <C-o>;call search('\<\<Bar>\u', 'W')<CR>
+"vnoremap <C-Left> <C-o>;call search('\<\<Bar>\u', 'bW')<CR>
+"vnoremap <C-Right> <C-o>;call search('\<\<Bar>\u', 'W')<CR>
 
 "Directional movement between buffers
 nnoremap <silent> <Leader>l <c-w>l
@@ -82,8 +85,8 @@ nnoremap <silent> <Leader>u <c-w>k<c-w>l
 nnoremap <silent> <Leader>b <c-w>j<c-w>h
 nnoremap <silent> <Leader>n <c-w>j<c-w>l
 
-map <Leader>Y :.w !pbcopy<cr><cr>
-vmap <Leader>Y :w !pbcopy<cr><cr>
+map <Leader>Y ;.w !pbcopy<cr><cr>
+vmap <Leader>Y ;w !pbcopy<cr><cr>
 vmap <Leader>p ;call PP()<cr>
 map <Leader>p ;call PP()<cr>
 function! PP()
@@ -92,15 +95,17 @@ function! PP()
   set nopaste
 endfunction
 
+map <Leader>L gg$p
+
 "quick config
 map <Leader>v ;tabnew ~/.vimrc<cr>
 map <Leader>V ;source $MYVIMRC<cr>
 
 map tt /tags="\(\S*\s*)*
 
-"nnoremap : ;
+nnoremap : ;
 nnoremap ; :
-"vnoremap : ;
+vnoremap : ;
 vnoremap ; :
 inoremap jj <Esc>
 nnoremap JJJJ <Nop>
