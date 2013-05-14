@@ -1,5 +1,4 @@
 set shellcmdflag=-Iic
-set shell=/bin/bash\ --rcfile\ ~/.bash_profile
 
 "VUNDLE CONFIG DO NOT CHANGE
 filetype off
@@ -59,7 +58,6 @@ function! XX()
   winc l
   new
   winc l
-  winc j
 endfunction
 
 "Custom maps"
@@ -79,11 +77,11 @@ nnoremap <silent> <Leader>l <c-w>l
 nnoremap <silent> <Leader>h <c-w>h
 nnoremap <silent> <Leader>k <c-w>k
 nnoremap <silent> <Leader>j <c-w>j
-"Net-hack directional movement between buffers
-nnoremap <silent> <Leader>y <c-w>k<c-w>h
-nnoremap <silent> <Leader>u <c-w>k<c-w>l
-nnoremap <silent> <Leader>b <c-w>j<c-w>h
-nnoremap <silent> <Leader>n <c-w>j<c-w>l
+
+"Folding tricks
+map <Leader>o ggzo''
+map <Leader>c ggzc''
+
 
 map <Leader>Y ;.w !pbcopy<cr><cr>
 vmap <Leader>Y ;w !pbcopy<cr><cr>
@@ -96,6 +94,7 @@ function! PP()
 endfunction
 
 map <Leader>L gg$p
+map <Leader>d ggdd
 
 "quick config
 map <Leader>v ;tabnew ~/.vimrc<cr>
