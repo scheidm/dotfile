@@ -1,8 +1,10 @@
 map ; :
+"don't accidentally close tabs
 map D :tabc<cr>
-unmap q
+map d <noop>
+"don't accidentally create macros
+map q <noop>
 map Q q
-unmap d
 hi -a Hint font-size: 16pt !important
 set showtabline=never
 nmap -builtin j 10j
