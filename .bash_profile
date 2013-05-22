@@ -28,8 +28,14 @@ alias gs="git status"
 alias ga="git add"
 alias gl="git log"
 alias gco="git checkout"
+alias gcp="git cherry-pick"
 alias gr="git reset"
 alias grl="git reflog"
+alias gsh="git show --raw"
+alias gal="git add !!:1"
+alias gcl="git clean"
+alias gdf="git diff"
+alias gre="git reset"
 
 TUX="mrs642@tux.cs.drexel.edu"
 #if [ -z "$STY" ]; then
@@ -41,3 +47,12 @@ alias down="scp $LWC:~/py/code/* ./"
 source ~/.rvm/scripts/rvm
 
 function echo_and_run() { echo "$@" ;"$@";}
+
+##
+# Your previous /Users/mscheid/.bash_profile file was backed up as /Users/mscheid/.bash_profile.macports-saved_2013-05-17_at_13:24:14
+##
+
+# MacPorts Installer addition on 2013-05-17_at_13:24:14: adding an appropriate PATH variable for use with MacPorts.
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+# Finished adapting your PATH environment variable for use with MacPorts.
+

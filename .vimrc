@@ -14,8 +14,11 @@ Bundle 'skalnik/vim-vroom'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-repeat'
+Bundle 'kana/vim-textobj-entire'
 "Powerline setup
+Bundle 'Lokaltog/vim-powerline'
 set nocompatible " Disable vi-compatibility
 set laststatus=2 " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
@@ -61,68 +64,77 @@ function! XX()
 endfunction
 
 "Custom maps"
-nmap <C-x> ;call XX()<cr>
-map <Leader>t ;tabnew<cr>;e 
+nnoremap <C-b> :call XX()<cr>
+nnoremap <Leader>t :tabnew<cr>:e 
 
 "CamelCase movement in visual and insert
-"nnoremap <C-Left> ;call search('\<\<Bar>\u', 'bW')<CR>
-"nnoremap <C-Right> ;call search('\<\<Bar>\u', 'W')<CR>
-"inoremap <Leader>h <C-o>;call search('\<\<Bar>\u', 'bW')<CR>
-"inoremap <Leader>l <C-o>;call search('\<\<Bar>\u', 'W')<CR>
-"vnoremap <C-Left> <C-o>;call search('\<\<Bar>\u', 'bW')<CR>
-"vnoremap <C-Right> <C-o>;call search('\<\<Bar>\u', 'W')<CR>
+nnoremap <Leader>h :call search('\<\<Bar>\u', 'bW')<CR>
+nnoremap <Leader>l :call search('\<\<Bar>\u', 'W')<CR>
+"inoremap <Leader>h <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
+"inoremap <Leader>l <C-o>:call search('\<\<Bar>\u', 'W')<CR>
+vnoremap <Leader>h <C-o>:call search('\<\<Bar>\u', 'bW')<CR>
+vnoremap <Leader>l <C-o>:call search('\<\<Bar>\u', 'W')<CR>
 
 "Directional movement between buffers
-nnoremap <silent> <Leader>l <c-w>l
-nnoremap <silent> <Leader>h <c-w>h
-nnoremap <silent> <Leader>k <c-w>k
-nnoremap <silent> <Leader>j <c-w>j
+nnoremap <silent> gl <c-w>l
+nnoremap <silent> gh <c-w>h
+nnoremap <silent> gk <c-w>k
+nnoremap <silent> gj <c-w>j
 
 "Folding tricks
-map <Leader>o ggzo''
-map <Leader>c ggzc''
+nnoremap <Leader>o ggzo''
+nnoremap <Leader>c ggzc''
 
 
-map <Leader>Y ;.w !pbcopy<cr><cr>
-vmap <Leader>Y ;w !pbcopy<cr><cr>
-vmap <Leader>p ;call PP()<cr>
-map <Leader>p ;call PP()<cr>
+nnoremap <Leader>Y :.w !pbcopy<cr><cr>
+vnoremap <Leader>Y :w !pbcopy<cr><cr>
+vnoremap <Leader>p :call PP()<cr>
+nnoremap <Leader>p :call PP()<cr>
 function! PP()
   set paste
   .!pbpaste
   set nopaste
 endfunction
 
-map <Leader>L gg$p
-map <Leader>d ggdd
+nnoremap <Leader>L gg$p
+nnoremap <Leader>d ggdd
+vnoremap <Leader>w <c-w>
+vnoremap <Leader>- <c-w>_
+vnoremap <Leader>= <c-w>=
+nnoremap <Leader>w <c-w>
+nnoremap <Leader>- <c-w>_
+nnoremap <Leader>= <c-w>=
+nnoremap <Leader>n :nohl<cr>
+
+nnoremap gw gT
+nnoremap ge gt
 
 "quick config
-map <Leader>v ;tabnew ~/.vimrc<cr>
-map <Leader>V ;source $MYVIMRC<cr>
+nnoremap <Leader>v :tabnew ~/.vimrc<cr>
+nnoremap <Leader>V :source $MYVIMRC<cr>
 
-map tt /tags="\(\S*\s*)*
+nnoremap tt /tags="\(\S*\s*)*
 
 nnoremap : ;
 nnoremap ; :
 vnoremap : ;
 vnoremap ; :
 inoremap jj <Esc>
-nnoremap JJJJ <Nop>
 highlight matchParen ctermbg=4
 
 set smartindent
 set autoindent
 "don't jump over text wrapped lines
-map j gj
-map k gk
+nnoremap j gj
+nnoremap k gk
 
-map <Leader>D ;mapclear<cr>:map <Leader>V :source $MYVIMRC<cr>
+nnoremap <Leader>D :mapclear<cr>:map <Leader>V :source $MYVIMRC<cr>
 "backup options
 "set backupdir=~/temp
 "`set backup
 
 "map compiler
-"map mm ;call CC()<cr>
+"map mm :call CC()<cr>
 
 set backspace=indent,eol,start
 set scrolloff=5
