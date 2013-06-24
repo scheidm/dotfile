@@ -20,3 +20,5 @@ nmap -builtin U :undo<Space>
 "" press tab to begin completion of :open :tabopen cmd
 set autocomplete=!/ex/(tab)?open,.?
 "" }}}
+" quick jump to last viewed tab (i.e. back from specific buffer request)
+map l <C-^>

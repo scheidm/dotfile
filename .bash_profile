@@ -1,5 +1,6 @@
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:./bin
+PATH=/usr/local/bin:$PATH
 export PATH
 
 PS1='\w\[\033[00m\]/@${HOSTNAME:0:8}/=^_^= '

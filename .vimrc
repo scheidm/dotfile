@@ -1,4 +1,5 @@
 set shellcmdflag=-Iic
+set nocompatible " Disable vi-compatibility
 
 "VUNDLE CONFIG DO NOT CHANGE
 filetype off
@@ -8,7 +9,6 @@ Bundle 'gmarik/vundle'
 filetype plugin indent on 
 "END VUNDLE SETUP
 
-Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/sudo.vim'
 Bundle 'skalnik/vim-vroom'
 Bundle 'Lokaltog/vim-easymotion'
@@ -16,10 +16,9 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
-Bundle 'kana/vim-textobj-entire'
+Bundle 'wincent/Command-T'
 "Powerline setup
 Bundle 'Lokaltog/vim-powerline'
-set nocompatible " Disable vi-compatibility
 set laststatus=2 " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
 "Bundle 'Lokaltog/powerline'
@@ -38,31 +37,8 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-set foldmethod=syntax
-set foldcolumn=3
-set foldlevel=6
-set foldnestmax=5
-set nocompatible
-set guifont=Lucida_console:h12:CANSI
-syntax enable
-colorscheme pablo
-
-
-"compile function
-function!  CC()
-	let fName=expand("%:r")
-	exe ";!g++ " . fName . ".cpp -o " . fName . ".run"
-	exe ";!" . fName . ".run"
-endfunction
-"4 way split
-function! XX()
-  vnew
-  new
-  winc l
-  new
-  winc l
-endfunction
-
+"redraw screen with ctrl-l
+nnoremap <silent> <C-l> :nohl<CR><C-l>
 "Custom maps"
 nnoremap <C-b> :call XX()<cr>
 nnoremap <Leader>t :tabnew<cr>:e 
@@ -81,31 +57,31 @@ nnoremap <silent> gh <c-w>h
 nnoremap <silent> gk <c-w>k
 nnoremap <silent> gj <c-w>j
 
-"Folding tricks
+"(un)fold at line specified by count without changing cursor location`
 nnoremap <Leader>o ggzo''
 nnoremap <Leader>c ggzc''
 
-
+"yank and put from system clipboard
 nnoremap <Leader>Y :.w !pbcopy<cr><cr>
 vnoremap <Leader>Y :w !pbcopy<cr><cr>
 vnoremap <Leader>p :call PP()<cr>
 nnoremap <Leader>p :call PP()<cr>
-function! PP()
-  set paste
-  .!pbpaste
-  set nopaste
-endfunction
 
-nnoremap <Leader>L gg$p
-nnoremap <Leader>d ggdd
+"with counts, paste at the end of specified line, cursor unchanged
+nnoremap <Leader>L gg$p''
+"with counts, delete specified line #, cursor unchanged
+nnoremap <Leader>d ggdd''
+"Move within splits
 vnoremap <Leader>w <c-w>
-vnoremap <Leader>- <c-w>_
-vnoremap <Leader>= <c-w>=
 nnoremap <Leader>w <c-w>
+"Maximize current split
+vnoremap <Leader>- <c-w>_
 nnoremap <Leader>- <c-w>_
+"equalize all splits space on screen
+vnoremap <Leader>= <c-w>=
 nnoremap <Leader>= <c-w>=
-nnoremap <Leader>n :nohl<cr>
 
+"move between tabs without shift keys
 nnoremap gw gT
 nnoremap ge gt
 
@@ -120,25 +96,16 @@ nnoremap ; :
 vnoremap : ;
 vnoremap ; :
 inoremap jj <Esc>
-highlight matchParen ctermbg=4
-
-set smartindent
-set autoindent
 "don't jump over text wrapped lines
 nnoremap j gj
 nnoremap k gk
 
 nnoremap <Leader>D :mapclear<cr>:map <Leader>V :source $MYVIMRC<cr>
-"backup options
-"set backupdir=~/temp
-"`set backup
 
-"map compiler
-"map mm :call CC()<cr>
-
+set smartindent
+set autoindent
 set backspace=indent,eol,start
 set scrolloff=5
-
 set number
 set ignorecase
 set smartcase
@@ -153,6 +120,43 @@ set pastetoggle=<f2>
 set backspace=2
 set hlsearch
 set ruler
+set foldmethod=syntax
+set foldcolumn=3
+set foldlevel=6
+set foldnestmax=5
+set guifont=Lucida_console:h12:CANSI
+syntax enable
+colorscheme pablo
+highlight matchParen ctermbg=4
+
+"backup options
+"set backupdir=~/temp
+"`set backup
+
+"compile function
+function!  CC()
+	let fName=expand("%:r")
+	exe ";!g++ " . fName . ".cpp -o " . fName . ".run"
+	exe ";!" . fName . ".run"
+endfunction
+
+function! PP()
+  set paste
+  .!pbpaste
+  set nopaste
+endfunction
+"
+"4 way split
+function! XX()
+  vnew
+  new
+  winc l
+  new
+endfunction
+
 if &t_Co > 1
 	syntax enable
 endif
+"
+"map compiler
+"map mm :call CC()<cr>
