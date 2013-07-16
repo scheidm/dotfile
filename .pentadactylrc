@@ -1,3 +1,4 @@
+set defsearch=duckduckgo
 map ; :
 "don't accidentally close tabs
 map D :tabc<cr>
