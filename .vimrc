@@ -16,7 +16,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
-Bundle 'wincent/Command-T'
+Bundle 'kien/ctrlp.vim'
+Bundle 'flazz/vim-colorschemes'
 "Powerline setup
 Bundle 'Lokaltog/vim-powerline'
 set laststatus=2 " Always show the statusline
@@ -37,12 +38,17 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+
 "redraw screen with ctrl-l
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 "Custom maps"
 nnoremap <C-b> :call XX()<cr>
-nnoremap <Leader>t :tabnew<cr>:e 
 
+nnoremap <Leader>p :CtrlP<cr>
+
+"no more accidental :wq
+nnoremap <Leader>s :w<cr>
+nnoremap <Leader>e :e 
 "CamelCase movement in visual and insert
 nnoremap <Leader>h :call search('\<\<Bar>\u', 'bW')<CR>
 nnoremap <Leader>l :call search('\<\<Bar>\u', 'W')<CR>
@@ -64,8 +70,8 @@ nnoremap <Leader>c ggzc''
 "yank and put from system clipboard
 nnoremap <Leader>Y :.w !pbcopy<cr><cr>
 vnoremap <Leader>Y :w !pbcopy<cr><cr>
-vnoremap <Leader>p :call PP()<cr>
-nnoremap <Leader>p :call PP()<cr>
+vnoremap <Leader>P :call PP()<cr>
+nnoremap <Leader>P :call PP()<cr>
 
 "with counts, paste at the end of specified line, cursor unchanged
 nnoremap <Leader>L gg$p''
@@ -91,16 +97,18 @@ nnoremap <Leader>V :source $MYVIMRC<cr>
 
 nnoremap tt /tags="\(\S*\s*)*
 
-nnoremap : ;
-nnoremap ; :
-vnoremap : ;
-vnoremap ; :
 inoremap jj <Esc>
 "don't jump over text wrapped lines
 nnoremap j gj
 nnoremap k gk
 
+"reset to defaults, for when you share your PC with another programmer
 nnoremap <Leader>D :mapclear<cr>:map <Leader>V :source $MYVIMRC<cr>
+
+"allow visual mode searches to span multiple words
+vnoremap * y/<C-r>"<cr>
+
+nnoremap <Leader>t :tabnew<cr>:e 
 
 set smartindent
 set autoindent

@@ -1,3 +1,5 @@
 [user]
 	name = scheidm
 	email = scheidm@wellcomposed.net
+[credential]
+	helper = cache --timeout=18000

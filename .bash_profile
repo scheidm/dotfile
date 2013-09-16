@@ -1,5 +1,5 @@
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:./bin
+PATH=$PATH:./bin:/sbin:/usr/sbin:/usr/local/sbin
 PATH=/usr/local/bin:$PATH
 export PATH
 
@@ -25,13 +25,18 @@ alias vu="vagrant up"
 alias vs="vagrant ssh"
 alias vp="vagrant provision"
 alias vreset="vagrant destroy -f && vagrant up"
+alias dbm="rake db:migrate"
+alias dbd="rake db:migrate:down"
+alias dbr="rake db:rollback"
+alias dbt="rake db:test:prepare"
+#alias sudo='sudo env PATH=$PATH'
 
 #Git config
 alias gg="git grep $1"
 alias gu="git push origin $1"
 alias gd="git pull origin $1"
 alias gc="git commit $1"
-alias gs="git status"
+alias g="git status"
 alias ga="git add"
 alias gl="git log"
 alias gco="git checkout"
@@ -43,7 +48,7 @@ alias gst="git stash"
 alias gal="git add !!:1"
 alias gcl="git clean"
 alias gdf="git diff"
-alias gre="git reset"
+alias greset="git reset"
 
 TUX="mrs642@tux.cs.drexel.edu"
 #if [ -z "$STY" ]; then
