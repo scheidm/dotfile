@@ -1,3 +1,7 @@
+"pundle
+" clone https://github.com/maksimr/pundle.git ~/.pentadactyl/plugin/pundle
+Bundle gwash/penta-sessions
+
 set defsearch=duckduckgo
 map ; :
 "don't accidentally close tabs

@@ -2,28 +2,31 @@ set shellcmdflag=-Iic
 set nocompatible " Disable vi-compatibility
 
 "VUNDLE CONFIG DO NOT CHANGE
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-filetype plugin indent on 
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
 "END VUNDLE SETUP
 
-Bundle 'vim-scripts/sudo.vim'
-Bundle 'skalnik/vim-vroom'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-repeat'
-Bundle 'kien/ctrlp.vim'
-Bundle 'flazz/vim-colorschemes'
+Plugin 'tpope/vim-obsession'
+Plugin 'vim-scripts/sudo.vim'
+Plugin 'skalnik/vim-vroom'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-repeat'
+Plugin 'kien/ctrlp.vim'
+Plugin 'flazz/vim-colorschemes'
 "Powerline setup
-Bundle 'Lokaltog/vim-powerline'
+Plugin 'Lokaltog/vim-powerline'
 set laststatus=2 " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
-"Bundle 'Lokaltog/powerline'
+"Plugin 'Lokaltog/powerline'
 "set rtp+={repository_root}/powerline/bindings/vim
+call vundle#end()
+filetype plugin indent on 
 
 au FileType c,cpp,java set cindent
 let mapleader = ","
