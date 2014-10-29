@@ -50,6 +50,7 @@ nnoremap <C-b> :call XX()<cr>
 nnoremap <Leader>p :CtrlP<cr>
 
 "no more accidental :wq
+nnoremap <Leader>w :w<cr>
 nnoremap <Leader>s :w<cr>
 nnoremap <Leader>e :e 
 "CamelCase movement in visual and insert
