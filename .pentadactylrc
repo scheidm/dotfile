@@ -1,6 +1,7 @@
 "pundle
 " clone https://github.com/maksimr/pundle.git ~/.pentadactyl/plugin/pundle
 Bundle gwash/penta-sessions
+Bundle ardaganir/pterosaur
 
 set defsearch=duckduckgo
 map ; :
@@ -26,4 +27,4 @@ nmap -builtin U :undo<Space>
 set autocomplete=!/ex/(tab)?open,.?
 "" }}}
 " quick jump to last viewed tab (i.e. back from specific buffer request)
-map l <C-^>
+nmap i <C-^>

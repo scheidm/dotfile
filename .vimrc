@@ -6,6 +6,7 @@ set nocompatible " Disable vi-compatibility
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'ardagnir/vimbed'
 Plugin 'gmarik/Vundle.vim'
 "END VUNDLE SETUP
 
