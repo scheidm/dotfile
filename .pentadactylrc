@@ -1,5 +1,5 @@
 "pundle
-" clone https://github.com/maksimr/pundle.git ~/.pentadactyl/plugin/pundle
+" git clone https://github.com/maksimr/pundle.git ~/.pentadactyl/plugin/pundle
 Bundle gwash/penta-sessions
 Bundle ardaganir/pterosaur
 

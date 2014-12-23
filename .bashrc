@@ -17,9 +17,11 @@ alias l="ls $2"
 alias c="cp $2 ~/temp/lab8"
 alias be="vim ~/.bashrc"
 alias bs="source ~/.bashrc"
+alias pe="vim ~/.pentadactylrc"
 alias rfn="ruhoh compile&&scp -r ./compiled/* selfforg@wellcomposed.net:~/public_html/flight"
 alias tux="ssh mrs642@tux.cs.drexel.edu"
 alias composed="ssh selfforg@wellcomposed.net"
+alias puerh="ssh sinh@puerh"
 
 #Git config
 alias g="git status"
@@ -56,6 +58,8 @@ alias te="vim ~/.tmux.conf"
 alias ts="tmux source-file ~/.tmux.conf"
 alias tqtd="tmuxinator start qtd"
 alias tfn="tmuxinator start fn"
+alias tlp="tmuxinator start lp"
+alias tnx="tmuxinator start nexus"
 alias tcwc="tmuxinator start cwc"
 
 #Vagrant
