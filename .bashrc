@@ -56,10 +56,9 @@ alias rcwc="ruhoh compile&&cp -rf ./compiled/* ~/code/personal-site&&cd
 #TMux
 alias te="vim ~/.tmux.conf"
 alias ts="tmux source-file ~/.tmux.conf"
+alias tm="tmuxinator start machines"
 alias tqtd="tmuxinator start qtd"
 alias tfn="tmuxinator start fn"
-alias tlp="tmuxinator start lp"
-alias tnx="tmuxinator start nexus"
 alias tcwc="tmuxinator start cwc"
 
 #Vagrant
