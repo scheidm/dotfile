@@ -1,34 +1,4 @@
-startup_message off 
-#caption always "%?%F%{-b 0g}%:%{-b 00}%?%w"
-bind { focus
-register f  `{`{
-		bind q process f
-			bind z screen vim 
-				register s `V`{`z`{`S`{`c`{`{
-							screen -t Bash 0
-
-#backtick 1 2700  2700  $HOME/code/scripts/dayRock
-#backtick 2 2700  2700  $HOME/code/scripts/weekRock
-#backtick 3 1     0     $HOME/code/scripts/class1
-#backtick 4 1     0     $HOME/code/scripts/class2
-#backtick 5 1     0     $HOME/code/scripts/class3
-#backtick 6 1     0     $HOME/code/scripts/class4
-#backtick 7 1     0     $HOME/code/scripts/class5
-#backtick 8 1     0     $HOME/code/scripts/holiday
-
-#hardstatus alwayslastline '%{-b 00}%{G}[][%{G}%1`%=%{Y%}%2`%{G}][%{W}%Y:%m-%d%{G}|%{W}%c%{G}]'
-hardstatus alwayslastline '%{-b
-00}%{G}[%{y}%3`%{c}%4`%{m}%5`%{G}][%{G}%1`%=%{Y%}%2`%{G}][%{W}%Y:%m-%d%{G}|%{W}%c%{G}]'
-#hardstatus string '%{=kG}%{G}[%1`%-42 ][%{w}%m%d%{G}|%{y}%3`%=%{W}%c %-042= %{G}][%2`]'
-#second line is attempt at day][ deadlines ][week
-
-# Default screens
-defshell bash
-shell bash
-
-bind k
-bind ^k
-bind K kill
-bind > process s 
-escape ``  
-
+caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= $LOGNAME@%H %c %Y-%m-%d"
+screen -t editor
+screen -t server
+select editor

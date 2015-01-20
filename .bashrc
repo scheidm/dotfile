@@ -4,8 +4,8 @@ PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export PATH="$PATH:$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 export EDITOR='vim'
 
-PS1='\w\[\033[00m\]/@${HOSTNAME:0:8}/=^_^= '
-PS2='\w\[\033[00m\]/@${HOSTNAME:0:8}/=^_^= '
+PS1='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
+PS2='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
 
 TUX="mrs642@tux.cs.drexel.edu"
 LWC="selfforg@wellcomposed.net"
