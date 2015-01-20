@@ -46,8 +46,6 @@ noremap <Right> <NOP>
 "redraw screen with ctrl-l
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 "Custom maps"
-nnoremap <C-b> :call XX()<cr>
-
 nnoremap <Leader>p :CtrlP<cr>
 
 "no more accidental :wq
@@ -138,13 +136,21 @@ set foldcolumn=3
 set foldlevel=6
 set foldnestmax=5
 set guifont=Lucida_console:h12:CANSI
+
+"language highlighting
 syntax enable
-colorscheme pablo
 highlight matchParen ctermbg=4
+autocmd BufEnter *.m*   set syntax=perl
+autocmd BufEnter * colorscheme pablo
+autocmd BufEnter *.js colorscheme nicotine
+autocmd BufEnter *.[mp]* colorscheme Tomorrow-Night
 
 "backup options
-"set backupdir=~/temp
-"`set backup
+set backup
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+set writebackup
 
 "compile function
 function!  CC()
@@ -167,9 +173,6 @@ function! XX()
   new
 endfunction
 
-if &t_Co > 1
-	syntax enable
-endif
 "
 "map compiler
 "map mm :call CC()<cr>
