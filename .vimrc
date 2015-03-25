@@ -111,7 +111,7 @@ nnoremap <Leader>D :mapclear<cr>:map <Leader>V :source $MYVIMRC<cr>
 "allow visual mode searches to span multiple words
 vnoremap * y/<C-r>"<cr>
 
-nnoremap <Leader>t :tabnew<cr>:e 
+nnoremap <Leader>t :tabnew<cr>:CtrlP<cr> 
 
 set smartindent
 set autoindent

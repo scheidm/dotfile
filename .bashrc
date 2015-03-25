@@ -20,8 +20,9 @@ alias bs="source ~/.bashrc"
 alias pe="vim ~/.pentadactylrc"
 alias rfn="ruhoh compile&&scp -r ./compiled/* selfforg@wellcomposed.net:~/public_html/flight"
 alias tux="ssh mrs642@tux.cs.drexel.edu"
+alias puerh="ssh -t sinh@puerh 'tmuxinator start qtd'"
+alias yumu="sudo ntpdate -u time.apple.gov&&sudo yum clean all&&sudo yum update -y"
 alias composed="ssh selfforg@wellcomposed.net"
-alias puerh="ssh sinh@puerh"
 
 #Git config
 alias g="git status"
@@ -56,7 +57,6 @@ alias rcwc="ruhoh compile&&cp -rf ./compiled/* ~/code/personal-site&&cd
 #TMux
 alias te="vim ~/.tmux.conf"
 alias ts="tmux source-file ~/.tmux.conf"
-alias tm="tmuxinator start machines"
 alias tqtd="tmuxinator start qtd"
 alias tfn="tmuxinator start fn"
 alias tcwc="tmuxinator start cwc"
