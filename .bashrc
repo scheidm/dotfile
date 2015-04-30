@@ -24,9 +24,11 @@ alias puerh="ssh -t sinh@puerh 'tmuxinator start qtd'"
 alias yumu="sudo ntpdate -u time.apple.gov&&sudo yum clean all&&sudo yum update -y"
 alias composed="ssh selfforg@wellcomposed.net"
 
-#Git config
+#Version Control config
 alias g="git status"
+alias s="svn status"
 alias ga="git add"
+alias gb="git branch"
 alias gc="git commit $1"
 alias gd="git pull origin $1"
 alias gg="git grep $1"
@@ -42,7 +44,6 @@ alias gdf="git diff"
 alias grl="git reflog"
 alias gsh="git show --raw"
 alias gst="git stash"
-alias greset="git reset"
 
 #Ruby/Rails
 alias dbd="rake db:migrate:down"

@@ -11,6 +11,7 @@ Plugin 'gmarik/Vundle.vim'
 "END VUNDLE SETUP
 
 Plugin 'tpope/vim-obsession'
+Plugin 'tpope/vim-abolish'
 Plugin 'vim-scripts/sudo.vim'
 Plugin 'skalnik/vim-vroom'
 Plugin 'Lokaltog/vim-easymotion'
@@ -42,6 +43,8 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+nnoremap + /\$\w\+_<CR>
+nnoremap _ f_x~
 
 "redraw screen with ctrl-l
 nnoremap <silent> <C-l> :nohl<CR><C-l>
@@ -126,7 +129,7 @@ set tabstop=2
 set shiftwidth=2
 set showmode
 set showmatch
-set textwidth=80
+set textwidth=120
 set pastetoggle=<f2>
 set backspace=2
 set hlsearch
@@ -141,9 +144,10 @@ set guifont=Lucida_console:h12:CANSI
 syntax enable
 highlight matchParen ctermbg=4
 autocmd BufEnter *.m*   set syntax=perl
+autocmd BufEnter *.t   set syntax=perl
 autocmd BufEnter * colorscheme pablo
 autocmd BufEnter *.js colorscheme nicotine
-autocmd BufEnter *.[mp]* colorscheme Tomorrow-Night
+autocmd BufEnter *.[mpt]* colorscheme Tomorrow-Night
 
 "backup options
 set backup
