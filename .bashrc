@@ -31,6 +31,7 @@ alias ga="git add"
 alias gb="git branch"
 alias gc="git commit $1"
 alias gd="git pull origin $1"
+alias gf="git fetch"
 alias gg="git grep $1"
 alias gl="git log"
 alias gm="git merge"
@@ -51,16 +52,9 @@ alias dbr="rake db:rollback"
 alias dbt="rake db:test:prepare"
 alias dbm="rake db:migrate"
 
-#Ruhoh
-alias rcwc="ruhoh compile&&cp -rf ./compiled/* ~/code/personal-site&&cd
-~/code/personal-site/"
-
 #TMux
 alias te="vim ~/.tmux.conf"
 alias ts="tmux source-file ~/.tmux.conf"
-alias tqtd="tmuxinator start qtd"
-alias tfn="tmuxinator start fn"
-alias tcwc="tmuxinator start cwc"
 
 #Vagrant
 alias v="vagrant"
