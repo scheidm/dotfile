@@ -53,7 +53,6 @@ nnoremap <Leader>p :CtrlP<cr>
 
 "no more accidental :wq
 nnoremap <Leader>w :w<cr>
-nnoremap <Leader>s :w<cr>
 nnoremap <Leader>e :e 
 "CamelCase movement in visual and insert
 nnoremap <Leader>h :call search('\<\<Bar>\u', 'bW')<CR>
@@ -84,8 +83,8 @@ nnoremap <Leader>L gg$p''
 "with counts, delete specified line #, cursor unchanged
 nnoremap <Leader>d ggdd''
 "Move within splits
-vnoremap <Leader>w <c-w>
-nnoremap <Leader>w <c-w>
+vnoremap <Leader>m <c-w>
+nnoremap <Leader>m <c-w>
 "Maximize current split
 vnoremap <Leader>- <c-w>_
 nnoremap <Leader>- <c-w>_
@@ -146,7 +145,8 @@ highlight matchParen ctermbg=4
 autocmd BufEnter *.m*   set syntax=perl
 autocmd BufEnter *.t   set syntax=perl
 autocmd BufEnter * colorscheme pablo
-autocmd BufEnter *.js colorscheme nicotine
+"autocmd BufEnter *.js colorscheme nicotine
+autocmd BufEnter *.js colorscheme ubloh
 autocmd BufEnter *.[mpt]* colorscheme Tomorrow-Night
 
 "backup options
