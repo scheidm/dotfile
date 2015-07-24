@@ -1,7 +1,7 @@
 PATH=$PATH:./bin:/sbin:/usr/sbin:/usr/local/sbin
 PATH=/usr/local/bin:$PATH
 PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export PATH="$PATH:$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 export EDITOR='vim'
 
 PS1='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
@@ -11,6 +11,7 @@ TUX="mrs642@tux.cs.drexel.edu"
 LWC="selfforg@wellcomposed.net"
 
 ARCHFLAGS="-arch x86_64"
+export DBIC_OVERWRITE_HELPER_METHODS_OK=1
 
 #Misc
 alias l="ls $2"
@@ -20,10 +21,20 @@ alias bs="source ~/.bashrc"
 alias pe="vim ~/.pentadactylrc"
 alias rfn="ruhoh compile&&scp -r ./compiled/* selfforg@wellcomposed.net:~/public_html/flight"
 alias tux="ssh mrs642@tux.cs.drexel.edu"
+alias ntp="sudo ntpdate -u time.apple.com"
+alias pbt="cd backend&&make&&sudo make install&&cd ..&&prove -rv backend/t/"
+alias yumu="sudo ntpdate -u time.apple.gov&&sudo yum clean all&&sudo yum update -y"
 alias serve="ruby -run -e httpd . -p 5000"
 alias puerh="ssh -t sinh@puerh 'tmuxinator start qtd'"
-alias yumu="sudo ntpdate -u time.apple.gov&&sudo yum clean all&&sudo yum update -y"
 alias composed="ssh selfforg@wellcomposed.net"
+alias build-nuke="cd backend;rm -rf blib;rm Makefile;rm MANIFEST;perl Makefile.PL;make manifest;vim MANIFEST;cd .."
+alias serve_this="sudo chgrp -R www-data .&&sudo chmod -R g+s ."
+
+#Docker
+alias d="docker images"
+alias dd="docker pull $1"
+alias du="docker push $1"
+alias dt="dockviz images --tree"
 
 #Version Control config
 alias g="git status"
@@ -43,9 +54,13 @@ alias gcl="git clean"
 alias gco="git checkout"
 alias gcp="git cherry-pick"
 alias gdf="git diff"
+alias sdf="svn diff"
 alias grl="git reflog"
 alias gsh="git show --raw"
 alias gst="git stash"
+function smiss(){
+  svn status | ? { $_ -match '^!\s+(.*)' } | % { svn rm $Matches[1] }
+}
 
 #Ruby/Rails
 alias dbd="rake db:migrate:down"
@@ -66,4 +81,5 @@ alias vu="vagrant up"
 alias vreset="vagrant destroy -f && vagrant up"
 
 function echo_and_run() { echo "$@" ;"$@";}
+
 

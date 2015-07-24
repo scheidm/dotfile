@@ -33,17 +33,8 @@ filetype plugin indent on
 au FileType c,cpp,java set cindent
 let mapleader = ","
 
-"disable arrows
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-
-nnoremap + /\$\w\+_<CR>
+"nnoremap + /\$\w\+_<CR>
+nnoremap Q <NOP>
 nnoremap _ f_x~
 
 "redraw screen with ctrl-l
