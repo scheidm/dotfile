@@ -31,7 +31,7 @@ alias build-nuke="cd backend;rm -rf blib;rm Makefile;rm MANIFEST;perl Makefile.P
 alias serve_this="sudo chgrp -R www-data .&&sudo chmod -R g+s ."
 
 #Docker
-alias d="docker images"
+alias d="docker $1"
 alias dd="docker pull $1"
 alias du="docker push $1"
 alias dt="dockviz images --tree"
