@@ -1,7 +1,4 @@
-PATH=$PATH:./bin:/sbin:/usr/sbin:/usr/local/sbin
-PATH=/usr/local/bin:$PATH
-PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+export PATH=/usr/local/rvm/gems/ruby-2.2.1/bin:/opt/local/bin:/opt/local/sbin:$PATH
 export EDITOR='vim'
 
 PS1='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
@@ -81,5 +78,3 @@ alias vu="vagrant up"
 alias vreset="vagrant destroy -f && vagrant up"
 
 function echo_and_run() { echo "$@" ;"$@";}
-
-
