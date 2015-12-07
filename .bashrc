@@ -36,6 +36,8 @@ alias dt="dockviz images --tree"
 #Version Control config
 alias g="git status"
 alias s="svn status"
+alias sa="svn add"
+alias ga="git add"
 alias ga="git add"
 alias gb="git branch"
 alias gc="git commit $1"
@@ -46,6 +48,7 @@ alias gl="git log"
 alias gm="git merge"
 alias gr="git reset"
 alias gu="git push origin $1"
+alias sc="svn commit -m $1"
 alias gal="git add !!:1"
 alias gcl="git clean"
 alias gco="git checkout"
@@ -56,7 +59,7 @@ alias grl="git reflog"
 alias gsh="git show --raw"
 alias gst="git stash"
 function smiss(){
-  svn status | ? { $_ -match '^!\s+(.*)' } | % { svn rm $Matches[1] }
+  svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm
 }
 
 #Ruby/Rails
@@ -66,8 +69,14 @@ alias dbt="rake db:test:prepare"
 alias dbm="rake db:migrate"
 
 #TMux
+alias td="tmux detach"
 alias te="vim ~/.tmux.conf"
+alias tf="tmux switch -t flightnight"
+alias ti="tmux info"
+alias tq="tmux switch -t qtd"
 alias ts="tmux source-file ~/.tmux.conf"
+alias tnq="tmux new -s qtd"
+alias tnf="tmux new -s flightnight"
 
 #Vagrant
 alias v="vagrant"

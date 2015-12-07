@@ -21,6 +21,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
 Plugin 'kien/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'digitaltoad/vim-jade'
 "Powerline setup
 Plugin 'Lokaltog/vim-powerline'
 set laststatus=2 " Always show the statusline
@@ -32,7 +33,10 @@ filetype plugin indent on
 
 au FileType c,cpp,java set cindent
 let mapleader = ","
-
+"highlight all characters matching the one under the cursor
+nnoremap <leader>z xhp/<C-R>-<CR>
+"highlight all non-ascii characters
+nnoremap <leader>a /[^\x00-\x7F]<CR>
 "nnoremap + /\$\w\+_<CR>
 nnoremap Q <NOP>
 nnoremap _ f_x~
@@ -135,9 +139,10 @@ syntax enable
 highlight matchParen ctermbg=4
 autocmd BufEnter *.m*   set syntax=perl
 autocmd BufEnter *.t   set syntax=perl
+autocmd BufEnter *.jade set syntax=jade
 autocmd BufEnter * colorscheme pablo
 "autocmd BufEnter *.js colorscheme nicotine
-autocmd BufEnter *.js colorscheme ubloh
+autocmd BufEnter *.j* colorscheme ubloh
 autocmd BufEnter *.[mpt]* colorscheme Tomorrow-Night
 
 "backup options
