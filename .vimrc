@@ -33,6 +33,7 @@ filetype plugin indent on
 
 au FileType c,cpp,java set cindent
 let mapleader = ","
+nnoremap <leader>n :next<CR>
 "highlight all characters matching the one under the cursor
 nnoremap <leader>z xhp/<C-R>-<CR>
 "highlight all non-ascii characters

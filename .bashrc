@@ -68,15 +68,20 @@ alias dbr="rake db:rollback"
 alias dbt="rake db:test:prepare"
 alias dbm="rake db:migrate"
 
-#TMux
+#TMux/Screen
 alias td="tmux detach"
 alias te="vim ~/.tmux.conf"
 alias tf="tmux switch -t flightnight"
 alias ti="tmux info"
 alias tq="tmux switch -t qtd"
 alias ts="tmux source-file ~/.tmux.conf"
+alias tt="tmux resize-pane -Z" #toggle full-size pane
+alias sdev="screen -x dev"
+alias tdev="tmux new-session -s dev \; new-window \; rename-window -t 1 editor \; rename-window -t 2 server \; next-window"
 alias tnq="tmux new -s qtd"
 alias tnf="tmux new -s flightnight"
+alias tdev2="tmux new-session -t dev -s dev_link"
+alias tlocal="unset TMUX; tmux -f ~/.tmux.conf -L local new-session -s dev"
 
 #Vagrant
 alias v="vagrant"
