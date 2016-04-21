@@ -22,6 +22,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'kien/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'digitaltoad/vim-jade'
+Plugin 'alfredodeza/jacinto.vim'
 "Powerline setup
 Plugin 'Lokaltog/vim-powerline'
 set laststatus=2 " Always show the statusline
@@ -138,7 +139,7 @@ set guifont=Lucida_console:h12:CANSI
 "language highlighting
 syntax enable
 highlight matchParen ctermbg=4
-autocmd BufEnter *.m*   set syntax=perl
+autocmd BufEnter *.m*   set syntax=mason
 autocmd BufEnter *.t   set syntax=perl
 autocmd BufEnter *.jade set syntax=jade
 autocmd BufEnter * colorscheme pablo
@@ -177,3 +178,9 @@ endfunction
 "
 "map compiler
 "map mm :call CC()<cr>
+
+"Ctrlp
+"use gitignore to filter
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+"ALWAYS jump to an open version of the file
+let g:ctrlp_switch_buffer = 'ET'
