@@ -1,5 +1,5 @@
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export EDITOR='vim'
+export EDITOR='/usr/local/bin/vim'
 
 PS1='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
 PS2='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
@@ -19,7 +19,11 @@ alias pe="vim ~/.pentadactylrc"
 alias rfn="ruhoh compile&&scp -r ./compiled/* selfforg@wellcomposed.net:~/public_html/flight"
 alias tux="ssh mrs642@tux.cs.drexel.edu"
 alias ntp="sudo ntpdate -u time.apple.com"
-alias pbt="cd backend&&make&&sudo make install&&cd ..&&prove -rv backend/t/"
+alias pbp="cd backend&&make&&sudo make install&&cd .."
+alias pokano="cd ..&&make&&sudo make install&&cd t"
+alias pbt="pbp&&prove -rv backend/t/"
+alias dbx1="export DBIC_TRACE=1"
+alias dbx0="unset DBIC_TRACE"
 alias yumu="sudo ntpdate -u time.apple.gov&&sudo yum clean all&&sudo yum update -y"
 alias serve="ruby -run -e httpd . -p 5000"
 alias puerh="ssh -t sinh@puerh 'tmuxinator start qtd'"
@@ -49,6 +53,7 @@ alias gm="git merge"
 alias gr="git reset"
 alias gu="git push origin $1"
 alias sc="svn commit -m $1"
+alias sp="chown -R mscheid .svn"
 alias gal="git add !!:1"
 alias gcl="git clean"
 alias gco="git checkout"
@@ -77,10 +82,10 @@ alias tq="tmux switch -t qtd"
 alias ts="tmux source-file ~/.tmux.conf"
 alias tt="tmux resize-pane -Z" #toggle full-size pane
 alias sdev="screen -x dev"
-alias tdev="tmux new-session -s dev \; new-window \; rename-window -t 1 editor \; rename-window -t 2 server \; next-window"
+alias tdev="tmux attach -t dev || tmux new-session -s dev \; split-window -h \; select-pane -t 2\; rename-window -t 1 editor \; resize-pane -L 60\; send-keys -t 2 'vim' C-m \; send-keys -t 1 'bash /usr/bin/msch_server.sh' C-m "
 alias tnq="tmux new -s qtd"
 alias tnf="tmux new -s flightnight"
-alias tdev2="tmux new-session -t dev -s dev_link"
+alias tdev2="tmux attach -t dev_link || tmux new-session -t dev -s dev_link"
 alias tlocal="unset TMUX; tmux -f ~/.tmux.conf -L local new-session -s dev"
 
 #Vagrant

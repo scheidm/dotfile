@@ -23,6 +23,11 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'alfredodeza/jacinto.vim'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'leshill/vim-json'
+Plugin 'pangloss/vim-javascript'
+Plugin 'w0rp/ale'
+Plugin 'twerth/ir_black'
 "Powerline setup
 Plugin 'Lokaltog/vim-powerline'
 set laststatus=2 " Always show the statusline
@@ -174,6 +179,8 @@ function! XX()
   winc l
   new
 endfunction
+nnoremap <Leader>4 :call XX()<cr>
+
 
 "
 "map compiler
@@ -182,5 +189,20 @@ endfunction
 "Ctrlp
 "use gitignore to filter
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-"ALWAYS jump to an open version of the file
-let g:ctrlp_switch_buffer = 'ET'
+let g:javascript_plugin_flow = 1
+let g:jsx_ext_required = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+
+"Config to allow for buffers to linger and easy switching
+set hidden
+"NEVER jump to an open version of the file
+let g:ctrlp_switch_buffer = 0
+function! DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
+endfunction
+nnoremap <leader>B :call DeleteHiddenBuffers()<cr>
