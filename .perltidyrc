@@ -1,0 +1,49 @@
+#-st
+-se
+
+# Line length
+-l=0
+
+# Use tabs, 4 spaces per tab
+-et=4
+-i=4
+-ci=4
+
+# Opening braces right
+-bar
+
+# Cuddled Else
+-ce
+
+# Stack Opening/Closing tokens
+-sot
+#-sct
+
+# Horizontal Tightness
+-pt=2
+-sbt=2
+-bbt=2
+# Operators:
+# .. :: << >> ** && .. || // -> => += -= .= %= &= |= ^= *= <>
+# ( ) <= >= == =~ !~ != ++ -- /= x=
+# ... **= <<= >>= &&= ||= //= <=>
+# , + - / * | % ! x ~ = \ ? : . < > ^ &
+-wls="=~ !~ .. << >> ** && .. || // => += -= /= x= .= %= &= |= ^= *= <= >= == != ... **= <<= >>= &&= ||= //= <=> + - / * | % x ~ = \ ? : . < > ^ &"
+-wrs="=~ !~ .. << >> ** && .. || // => += -= /= x= .= %= &= |= ^= *= <= >= == != ++ -- ... **= <<= >>= &&= ||= //= <=> + - / * , | % x ~ = ? : . < > ^"
+-nwls=":: <> )  ++ -- , ! -> "
+-nwrs=":: <> ( ! & \ ->"
+
+# Loop semicolons should be tight
+-nsfs
+
+# Don't indent block comments to match code
+-ibc
+-isbc
+#-nibc
+
+# Don't outdent long quotes
+-nolq
+
+-nskp
+-nsak="*"
+

@@ -28,6 +28,7 @@ Plugin 'leshill/vim-json'
 Plugin 'pangloss/vim-javascript'
 Plugin 'w0rp/ale'
 Plugin 'twerth/ir_black'
+Plugin 'rdunklau/vim-perltidy'
 "Powerline setup
 Plugin 'Lokaltog/vim-powerline'
 set laststatus=2 " Always show the statusline
@@ -182,13 +183,30 @@ endfunction
 nnoremap <Leader>4 :call XX()<cr>
 
 
+"define :Tidy command to run perltidy on visual selection || entire buffer"
+command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
+
+"run :Tidy on entire buffer and return cursor to (approximate) original position"
+fun DoTidy()
+    let l = line(".")
+    let c = col(".")
+    :Tidy
+    call cursor(l, c)
+endfun
+
+"shortcut for normal mode to run on entire buffer then return to current line"
+au Filetype perl nmap <F2> :call DoTidy()<CR>
+
+"shortcut for visual mode to run on the the current visual selection"
+au Filetype perl vmap <F2> :Tidy<CR>
+
 "
 "map compiler
 "map mm :call CC()<cr>
 
 "Ctrlp
 "use gitignore to filter
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_user_command = 'cd %s && git ls-files -co --exclude-standard'
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
 let g:ale_lint_on_save = 1

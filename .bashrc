@@ -28,8 +28,10 @@ alias yumu="sudo ntpdate -u time.apple.gov&&sudo yum clean all&&sudo yum update 
 alias serve="ruby -run -e httpd . -p 5000"
 alias puerh="ssh -t sinh@puerh 'tmuxinator start qtd'"
 alias composed="ssh selfforg@wellcomposed.net"
-alias build-nuke="cd backend;rm -rf blib;rm Makefile;rm MANIFEST;perl Makefile.PL;make manifest;vim MANIFEST;cd .."
+alias build-nuke="rm -rf blib;rm Makefile;rm MANIFEST;perl Makefile.PL;make manifest;vim MANIFEST"
 alias serve_this="sudo chgrp -R www-data .&&sudo chmod -R g+s ."
+alias nuke_firewall="sudo systemctl stop firewalld && sudo systemctl disable firewalld && sudo systemctl mask firewalld"
+
 
 #Docker
 alias d="docker $1"
@@ -85,6 +87,7 @@ alias sdev="screen -x dev"
 alias tdev="tmux attach -t dev || tmux new-session -s dev \; split-window -h \; select-pane -t 2\; rename-window -t 1 editor \; resize-pane -L 60\; send-keys -t 2 'vim' C-m \; send-keys -t 1 'bash /usr/bin/msch_server.sh' C-m "
 alias tnq="tmux new -s qtd"
 alias tnf="tmux new -s flightnight"
+alias tns="tmux new-window; tmux split-window -h; tmux resize-pane -L 60;"
 alias tdev2="tmux attach -t dev_link || tmux new-session -t dev -s dev_link"
 alias tlocal="unset TMUX; tmux -f ~/.tmux.conf -L local new-session -s dev"
 
@@ -99,3 +102,5 @@ alias vreset="vagrant destroy -f && vagrant up"
 function echo_and_run() { echo "$@" ;"$@";}
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+COLUMNS=250
+
