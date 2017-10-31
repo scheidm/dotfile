@@ -16,6 +16,7 @@ alias c="cp $2 ~/temp/lab8"
 alias be="vim ~/.bashrc"
 alias bs="source ~/.bashrc"
 alias pe="vim ~/.pentadactylrc"
+alias up="dnf clean all && dnf update -y"
 alias rfn="ruhoh compile&&scp -r ./compiled/* selfforg@wellcomposed.net:~/public_html/flight"
 alias tux="ssh mrs642@tux.cs.drexel.edu"
 alias ntp="sudo ntpdate -u time.apple.com"
@@ -43,6 +44,7 @@ alias dt="dockviz images --tree"
 alias g="git status"
 alias s="svn status"
 alias sa="svn add"
+alias sg="echo '.svn/*' >> .gitignore"
 alias ga="git add"
 alias ga="git add"
 alias gb="git branch"
@@ -104,3 +106,7 @@ function echo_and_run() { echo "$@" ;"$@";}
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 COLUMNS=250
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
