@@ -1,4 +1,5 @@
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PERL5LIB="$HOME/perllib/vault/share/perl5/:$HOME/perllib/nexus-core/share/perl5/"
 export EDITOR='/usr/local/bin/vim'
 
 PS1='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
@@ -9,6 +10,27 @@ LWC="selfforg@wellcomposed.net"
 
 ARCHFLAGS="-arch x86_64"
 export DBIC_OVERWRITE_HELPER_METHODS_OK=1
+function sem() { 
+cd $1
+for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
+do
+    echo "i:$i" && cd $i && make ; sudo make install ; cd ../;
+done
+cd ..
+}
+function ses() { 
+cd $1
+for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
+do
+  cd $i;
+  svn info | grep "^URL" | sed 's/URL: http:\/\/[a-z\.]*@subversion[a-z\.]*\/LPI\/branches\///';
+  svn status | grep -v '?'
+  cd ../;
+done
+cd ..
+}
+export -f ses;
+export -f sem;
 
 #Misc
 alias l="ls $2"
@@ -29,10 +51,15 @@ alias yumu="sudo ntpdate -u time.apple.gov&&sudo yum clean all&&sudo yum update 
 alias serve="ruby -run -e httpd . -p 5000"
 alias puerh="ssh -t sinh@puerh 'tmuxinator start qtd'"
 alias composed="ssh selfforg@wellcomposed.net"
-alias build-nuke="rm -rf blib;rm Makefile;rm MANIFEST;perl Makefile.PL;make manifest;vim MANIFEST"
 alias serve_this="sudo chgrp -R www-data .&&sudo chmod -R g+s ."
 alias nuke_firewall="sudo systemctl stop firewalld && sudo systemctl disable firewalld && sudo systemctl mask firewalld"
 
+
+#Build
+alias brm='sudo rm -rf `cat makeloc`'
+alias bmk='perl Makefile.PL PREFIX=`cat makeloc`'
+alias bmi='make && sudo make install'
+alias build-nuke="rm -rf blib;rm Makefile;rm MANIFEST;perl Makefile.PL;make manifest;vim MANIFEST"
 
 #Docker
 alias d="docker $1"
@@ -44,7 +71,9 @@ alias dt="dockviz images --tree"
 alias g="git status"
 alias s="svn status"
 alias sa="svn add"
+alias sc="svn commit -m"
 alias sg="echo '.svn/*' >> .gitignore"
+alias ss="svn switch"
 alias ga="git add"
 alias ga="git add"
 alias gb="git branch"
@@ -58,6 +87,8 @@ alias gr="git reset"
 alias gu="git push origin $1"
 alias sc="svn commit -m $1"
 alias sp="chown -R mscheid .svn"
+#ses = environment status, see top of file
+#sem = environment install, see top of file
 alias gal="git add !!:1"
 alias gcl="git clean"
 alias gco="git checkout"
