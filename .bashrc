@@ -1,6 +1,7 @@
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PERL5LIB="$HOME/perllib/vault/share/perl5/:$HOME/perllib/nexus-core/share/perl5/"
+export PERL5LIB="$HOME/perllib/vault/share/perl5/:$HOME/perllib/nexus-core/share/perl5/:$HOME/perllib/qa/share/perl5/"
 export EDITOR='/usr/local/bin/vim'
+export WORKINGENV='~/code/env/vault-web-proto'
 
 PS1='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
 PS2='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '

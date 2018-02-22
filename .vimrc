@@ -2,12 +2,12 @@ set shellcmdflag=-Iic
 set nocompatible " Disable vi-compatibility
 
 "VUNDLE CONFIG DO NOT CHANGE
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'ardagnir/vimbed'
-Plugin 'gmarik/Vundle.vim'
 "END VUNDLE SETUP
 
 Plugin 'tpope/vim-obsession'
@@ -16,25 +16,21 @@ Plugin 'vim-scripts/sudo.vim'
 Plugin 'skalnik/vim-vroom'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'alfredodeza/jacinto.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'leshill/vim-json'
 Plugin 'pangloss/vim-javascript'
-Plugin 'w0rp/ale'
 Plugin 'twerth/ir_black'
 Plugin 'rdunklau/vim-perltidy'
-"Powerline setup
-Plugin 'Lokaltog/vim-powerline'
-set laststatus=2 " Always show the statusline
-set encoding=utf-8 " Necessary to show Unicode glyphs
-"Plugin 'Lokaltog/powerline'
-"set rtp+={repository_root}/powerline/bindings/vim
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'edkolev/tmuxline.vim'
 call vundle#end()
 filetype plugin indent on 
 
@@ -52,7 +48,7 @@ nnoremap _ f_x~
 "redraw screen with ctrl-l
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 "Custom maps"
-nnoremap <Leader>p :CtrlP<cr>
+nnoremap <Leader>p :CtrlPMRU<cr>
 
 "no more accidental :wq
 nnoremap <Leader>w :w<cr>
@@ -184,10 +180,10 @@ nnoremap <Leader>4 :call XX()<cr>
 
 
 "define :Tidy command to run perltidy on visual selection || entire buffer"
-command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
+command! -range=% -nargs=* Tidy <line1>,<line2>!perltidy
 
 "run :Tidy on entire buffer and return cursor to (approximate) original position"
-fun DoTidy()
+function! DoTidy()
     let l = line(".")
     let c = col(".")
     :Tidy
@@ -206,7 +202,13 @@ au Filetype perl vmap <F2> :Tidy<CR>
 
 "Ctrlp
 "use gitignore to filter
-let g:ctrlp_user_command = 'cd %s && git ls-files -co --exclude-standard'
+let g:ctrlp_follow_symlinks = 2
+let g:ctrlp_working_path_mode = 'rw'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|blib)$',
+  \ 'file': '\v\.(*rc|exe|so|dll|tmp|sw*|)$'
+  \}
+let g:ctrlp_show_hidden = 1
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
 let g:ale_lint_on_save = 1
@@ -224,3 +226,32 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 nnoremap <leader>B :call DeleteHiddenBuffers()<cr>
+
+"airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':r:r'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+
+"tmuxline
+let g:tmuxline_preset = {
+      \'a'    : '#h',
+      \'b'    : '#W',
+      \'c'    : '#(whoami)',
+      \'win'  : '#I #W',
+      \'cwin' : '#W',
+      \'x'    : '%a',
+      \'y'    : '#W %R',
+      \'z'    : '#H'}
