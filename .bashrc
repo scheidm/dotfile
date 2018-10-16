@@ -1,5 +1,5 @@
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export EDITOR='/usr/local/bin/vim'
+export EDITOR='/usr/bin/vim'
 
 PS1='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
 PS2='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
@@ -98,9 +98,13 @@ alias vs="vagrant ssh"
 alias vp="vagrant provision"
 alias vu="vagrant up"
 alias vreset="vagrant destroy -f && vagrant up"
-
+l
 function echo_and_run() { echo "$@" ;"$@";}
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 COLUMNS=250
 
+export DEMOS_FRONT_END_REPO="/Users/mscheid/code/demos/1.1.2/front-end"
+export DEMOS_ASSET_SERVER="10.19.32.55:3000"
+export VAULT_FRONT_END_REPO="/Users/mscheid/code/vault-web-trunk"
+export VAULT_ASSET_SERVER="10.19.32.55:3000"

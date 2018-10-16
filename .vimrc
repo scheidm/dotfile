@@ -29,6 +29,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'w0rp/ale'
 Plugin 'twerth/ir_black'
 Plugin 'rdunklau/vim-perltidy'
+Plugin 'tyru/open-browser.vim'
 "Powerline setup
 Plugin 'Lokaltog/vim-powerline'
 set laststatus=2 " Always show the statusline
@@ -37,6 +38,9 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 "set rtp+={repository_root}/powerline/bindings/vim
 call vundle#end()
 filetype plugin indent on 
+let g:netrw_nogx = 1 " disable netrw's gx mapping. 
+nnoremap gx <Plug>(openbrowser-smart-search) 
+vnoremap gx <Plug>(openbrowser-smart-search) 
 
 au FileType c,cpp,java set cindent
 let mapleader = ","
@@ -146,6 +150,7 @@ set guifont=Lucida_console:h12:CANSI
 syntax enable
 highlight matchParen ctermbg=4
 autocmd BufEnter *.m*   set syntax=mason
+autocmd BufEnter *.vue   set syntax=html
 autocmd BufEnter *.t   set syntax=perl
 autocmd BufEnter *.jade set syntax=jade
 autocmd BufEnter * colorscheme pablo
