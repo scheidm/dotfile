@@ -2,12 +2,12 @@ set shellcmdflag=-Iic
 set nocompatible " Disable vi-compatibility
 
 "VUNDLE CONFIG DO NOT CHANGE
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+""git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'ardagnir/vimbed'
-Plugin 'gmarik/Vundle.vim'
 "END VUNDLE SETUP
 
 Plugin 'tpope/vim-obsession'
@@ -16,17 +16,16 @@ Plugin 'vim-scripts/sudo.vim'
 Plugin 'skalnik/vim-vroom'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'alfredodeza/jacinto.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'leshill/vim-json'
 Plugin 'pangloss/vim-javascript'
-Plugin 'w0rp/ale'
 Plugin 'twerth/ir_black'
 Plugin 'rdunklau/vim-perltidy'
 Plugin 'tyru/open-browser.vim'
@@ -211,7 +210,7 @@ au Filetype perl vmap <F2> :Tidy<CR>
 
 "Ctrlp
 "use gitignore to filter
-let g:ctrlp_user_command = 'cd %s && git ls-files -co --exclude-standard'
+"let g:ctrlp_user_command = 'cd %s && git ls-files -co --exclude-standard'
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
 let g:ale_lint_on_save = 1

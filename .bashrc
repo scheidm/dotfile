@@ -1,5 +1,5 @@
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PERL5LIB="$HOME/perllib/vault/share/perl5/:$HOME/perllib/nexus-core/share/perl5/"
+export PERL5LIB="$HOME/perllib/demos/share/perl5/:$HOME/perllib/vault/share/perl5/:$HOME/perllib/nexus-core/share/perl5/"
 export EDITOR='/usr/local/bin/vim'
 
 PS1='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
@@ -10,27 +10,6 @@ LWC="selfforg@wellcomposed.net"
 
 ARCHFLAGS="-arch x86_64"
 export DBIC_OVERWRITE_HELPER_METHODS_OK=1
-function sem() { 
-cd $1
-for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
-do
-    echo "i:$i" && cd $i && make ; sudo make install ; cd ../;
-done
-cd ..
-}
-function ses() { 
-cd $1
-for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
-do
-  cd $i;
-  svn info | grep "^URL" | sed 's/URL: http:\/\/[a-z\.]*@subversion[a-z\.]*\/LPI\/branches\///';
-  svn status | grep -v '?'
-  cd ../;
-done
-cd ..
-}
-export -f ses;
-export -f sem;
 
 #Misc
 alias l="ls $2"
@@ -56,10 +35,15 @@ alias nuke_firewall="sudo systemctl stop firewalld && sudo systemctl disable fir
 
 
 #Build
-alias brm='sudo rm -rf `cat makeloc`'
+alias brm='sudo rm -rf `cat makeloc`&&rm -rf blib'
 alias bmk='perl Makefile.PL PREFIX=`cat makeloc`'
 alias bmi='make && sudo make install'
 alias build-nuke="rm -rf blib;rm Makefile;rm MANIFEST;perl Makefile.PL;make manifest;vim MANIFEST"
+alias btg='read TAG_TARGET <tag-target;echo svn cp `svn info --show-item=url` http://subversion.int.bed.liquidpixels.net/$TAG_TARGET$1'
+
+#vault
+alias vrs="sudo mysql tomato < sql/dropTables.sql&&echo 'drop 1' &&sudo mysql tomato< sql/createDB.sql&&echo 'create 1' && sudo mysql bacon < ../tools/sql/dropDB.sql && echo 'drop 2' && sudo mysql bacon < ../tools/sql/nexus_database_schema.sql && echo 'create 2'&& sudo mysql bacon < ../tools/sql/automated-demos.sql && echo 'auto demos imported' && sudo mysql bacon < ../nd/sql/demosRoles.sql && echo 'roles imported' && sudo mysql bacon < /home/mscheid/migrations/demosUsersAndRoles.sql"
+alias vmig="bmk&&bmi&&perl bin/migration.pl&& sudo mysql bacon < ../tools/sql/automated-nexus-vault.sql && sudo mysql bacon < ../tools/sql/automated-permissioning.sql"
 
 #Docker
 alias d="docker $1"
@@ -73,7 +57,10 @@ alias s="svn status"
 alias sa="svn add"
 alias sc="svn commit -m"
 alias sg="echo '.svn/*' >> .gitignore"
+alias si="svn info"
 alias ss="svn switch"
+alias sii="svn info --show-item"
+
 alias ga="git add"
 alias ga="git add"
 alias gb="git branch"
@@ -94,7 +81,7 @@ alias gcl="git clean"
 alias gco="git checkout"
 alias gcp="git cherry-pick"
 alias gdf="git diff"
-alias sdf="svn diff"
+alias sdf="svn diff -x -u"
 alias grl="git reflog"
 alias gsh="git show --raw"
 alias gst="git stash"
@@ -116,6 +103,7 @@ alias ti="tmux info"
 alias tq="tmux switch -t qtd"
 alias ts="tmux source-file ~/.tmux.conf"
 alias tt="tmux resize-pane -Z" #toggle full-size pane
+alias tsp="tmux split-pane -h \; resize-pane -L 60\; swap-pane -U"
 alias sdev="screen -x dev"
 alias tdev="tmux attach -t dev || tmux new-session -s dev \; split-window -h \; select-pane -t 2\; rename-window -t 1 editor \; resize-pane -L 60\; send-keys -t 2 'vim' C-m \; send-keys -t 1 'bash /usr/bin/msch_server.sh' C-m "
 alias tnq="tmux new -s qtd"
@@ -133,6 +121,47 @@ alias vu="vagrant up"
 alias vreset="vagrant destroy -f && vagrant up"
 l
 function echo_and_run() { echo "$@" ;"$@";}
+function sem() { 
+cd $1
+for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
+do
+    echo "i:$i" && cd $i && perl Makefile.PL PREFIX=`cat makeloc` ; sudo make install ; cd ../;
+done
+cd ..
+}
+function ses() { 
+cd $1
+for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
+do
+  cd $i;
+  svn info | grep "^URL" | sed 's/URL: http:\/\/[a-z\.]*@subversion[a-z\.]*\/LPI\/branches\///';
+  svn status | grep -v '?'
+  cd ../;
+done
+cd ..
+}
+function sec() { 
+cd $1
+for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
+do
+  cd $i;
+  brm&&bmk&&bmi;
+  cd ../;
+done
+cd ..
+}
+function sereset() { 
+cd $1
+for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
+do
+    echo "i:$i" && cd $i &&brm && rm -rf blib/;bmk;bmi;cd ../;
+done
+cd ..
+}
+export -f sec;
+export -f ses;
+export -f sem;
+export -f sereset;
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 COLUMNS=250
