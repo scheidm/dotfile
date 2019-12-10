@@ -1,13 +1,14 @@
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PERL5LIB="$HOME/perllib/demos/share/perl5/:$HOME/perllib/vault/share/perl5/:$HOME/perllib/nexus-core/share/perl5/"
+export PERL5LIB="$HOME/perllib/builder/share/perl5/:$HOME/perllib/demos/share/perl5/:$HOME/perllib/vault/share/perl5/:$HOME/perllib/nexus-core/share/perl5/:/home/mscheid/perllib/support/share/perl5/"
 export EDITOR='/usr/local/bin/vim'
 
-PS1='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
-PS2='\w\[\033[00m\]/@${HOSTNAME%%.*}/=^_^= '
+PS1="\[$(tput setaf 2)\]\w\\100\h/=^_^= \[$(tput sgr0)\]"        
+PS2="\[$(tput setaf 2)\]\w\\100\h/=^_^= \[$(tput sgr0)\]"        
 
 TUX="mrs642@tux.cs.drexel.edu"
 LWC="selfforg@wellcomposed.net"
 
+PROMPT_DIRTRIM=2
 ARCHFLAGS="-arch x86_64"
 export DBIC_OVERWRITE_HELPER_METHODS_OK=1
 
@@ -32,18 +33,19 @@ alias puerh="ssh -t sinh@puerh 'tmuxinator start qtd'"
 alias composed="ssh selfforg@wellcomposed.net"
 alias serve_this="sudo chgrp -R www-data .&&sudo chmod -R g+s ."
 alias nuke_firewall="sudo systemctl stop firewalld && sudo systemctl disable firewalld && sudo systemctl mask firewalld"
+alias ports="netstat -tulpn"
 
 
 #Build
 alias brm='sudo rm -rf `cat makeloc`&&rm -rf blib'
 alias bmk='perl Makefile.PL PREFIX=`cat makeloc`'
 alias bmi='make && sudo make install'
-alias build-nuke="rm -rf blib;rm Makefile;rm MANIFEST;perl Makefile.PL;make manifest;vim MANIFEST"
+alias build-nuke="make clean;perl Makefile.PL;make manifest;vim MANIFEST"
 alias btg='read TAG_TARGET <tag-target;echo svn cp `svn info --show-item=url` http://subversion.int.bed.liquidpixels.net/$TAG_TARGET$1'
 
 #vault
-alias vrs="sudo mysql tomato < sql/dropTables.sql&&echo 'drop 1' &&sudo mysql tomato< sql/createDB.sql&&echo 'create 1' && sudo mysql bacon < ../tools/sql/dropDB.sql && echo 'drop 2' && sudo mysql bacon < ../tools/sql/nexus_database_schema.sql && echo 'create 2'&& sudo mysql bacon < ../tools/sql/automated-demos.sql && echo 'auto demos imported' && sudo mysql bacon < ../nd/sql/demosRoles.sql && echo 'roles imported' && sudo mysql bacon < /home/mscheid/migrations/demosUsersAndRoles.sql"
-alias vmig="bmk&&bmi&&perl bin/migration.pl&& sudo mysql bacon < ../tools/sql/automated-nexus-vault.sql && sudo mysql bacon < ../tools/sql/automated-permissioning.sql"
+alias vrs="sudo mysql neuron_vault < sql/dropTables.sql&&echo 'drop 1' &&sudo mysql neuron_vault< sql/createDB.sql&&echo 'create 1' && sudo mysql nexus_core < ../tools/sql/dropDB.sql && echo 'drop 2' && sudo mysql nexus_core < /home/mscheid/migrations/bacon12-6-18.sql && echo 'create 2'&& sudo mysql nexus_core < ../tools/sql/upgradeBacon.sql&& echo 'upgrade complete' && sudo mysql nexus_core < ../tools/sql/automated-demos.sql && echo 'auto demos imported'&& sudo mysql nexus_core < ../tools/sql/automated-nexus-vault.sql && echo 'auto-nexus-vault imported' && sudo mysql nexus_core < ../tools/sql/automated-permissioning.sql && sudo mysql nexus_core < ../tools/sql/automated-nexus-support.sql && echo 'auto nexus-support imported' && sudo mysql nexus_core< ../tools/sql/vaultRoles.sql && echo 'roles created'"
+alias vmig="bmk&&bmi&&perl bin/migration.pl > phones.csv"
 
 #Docker
 alias d="docker $1"
@@ -89,6 +91,11 @@ function smiss(){
   svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm
 }
 
+#perl
+alias pv="while read line ; do perl -c "$line"; done <<< $(svn status -q | sed "s/M\s*//";)"
+alias pca='while read line ; do echo $line; perl -c "$line"; done'
+alias smf='svn status -q | sed "s/^\w\s*//";'
+
 #Ruby/Rails
 alias dbd="rake db:migrate:down"
 alias dbr="rake db:rollback"
@@ -104,10 +111,12 @@ alias tq="tmux switch -t qtd"
 alias ts="tmux source-file ~/.tmux.conf"
 alias tt="tmux resize-pane -Z" #toggle full-size pane
 alias tsp="tmux split-pane -h \; resize-pane -L 60\; swap-pane -U"
+alias tfix="stty sane"
 alias sdev="screen -x dev"
 alias tdev="tmux attach -t dev || tmux new-session -s dev \; split-window -h \; select-pane -t 2\; rename-window -t 1 editor \; resize-pane -L 60\; send-keys -t 2 'vim' C-m \; send-keys -t 1 'bash /usr/bin/msch_server.sh' C-m "
 alias tnq="tmux new -s qtd"
 alias tnf="tmux new -s flightnight"
+alias tnl="tmux new-window; tmux split-window;tmux split-window; tmux select-layout even-vertical"
 alias tns="tmux new-window; tmux split-window -h; tmux resize-pane -L 60;"
 alias tdev2="tmux attach -t dev_link || tmux new-session -t dev -s dev_link"
 alias tlocal="unset TMUX; tmux -f ~/.tmux.conf -L local new-session -s dev"
@@ -119,13 +128,13 @@ alias vs="vagrant ssh"
 alias vp="vagrant provision"
 alias vu="vagrant up"
 alias vreset="vagrant destroy -f && vagrant up"
-l
+
 function echo_and_run() { echo "$@" ;"$@";}
 function sem() { 
 cd $1
 for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
 do
-    echo "i:$i" && cd $i && perl Makefile.PL PREFIX=`cat makeloc` ; sudo make install ; cd ../;
+    echo "i:$i" && cd $i && perl Makefile.PL PREFIX=`cat makeloc` ; bmk&&bmi; cd ../;
 done
 cd ..
 }
@@ -140,6 +149,16 @@ do
 done
 cd ..
 }
+function seu() { 
+cd $1
+for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
+do
+  cd $i;
+  svn up
+  cd ../;
+done
+cd ..
+}
 function sec() { 
 cd $1
 for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
@@ -149,6 +168,39 @@ do
   cd ../;
 done
 cd ..
+}
+function seb(){
+echo searching for changes
+cd $1
+checkdir=`find . -maxdepth 1 -type d | tail -n 1`
+repoRoot=`svn info $checkdir --show-item repos-root-url`
+for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
+do
+  cd $i
+  if [ -e tagdir ]; then
+    localRev=`svn info . --show-item last-changed-revision`
+    repoLocation=`svn info . --show-item relative-url`
+    foreignDir=`cat tagdir`
+    foreignLoc=$repoRoot/$foreignDir
+    #echo $foreignLoc
+    foreignRev=`svn info $foreignLoc --show-item last-changed-revision`
+    let revDelta=$localRev-$foreignRev
+    #echo $revDelta $foreignLoc
+    if [ $revDelta -gt 0 ]; then
+      tag=`svn ls $foreignLoc |sort -r | head -n 1`
+      name=`expr match "$repoLocation" '.*/\(.*\)/.*'`
+      version=`expr match "$repoLocation" '.*/Release-\(.*\)'`
+      rc=`expr match "$tag" '.*rc\(.*\)/'`
+      tag=${tag%.*}
+      let target=$rc+1
+      tagNumber=$tag.rc$target
+      echo svn cp $repoRoot${repoLocation:1} $foreignLoc/$tagNumber -m \"Release $name $version.rc$target\"
+    fi
+  fi
+  cd ..
+done
+cd ..
+echo end report
 }
 function sereset() { 
 cd $1
@@ -160,7 +212,9 @@ cd ..
 }
 export -f sec;
 export -f ses;
+export -f seb;
 export -f sem;
+export -f seu;
 export -f sereset;
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
