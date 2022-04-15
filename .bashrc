@@ -1,16 +1,14 @@
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PERL5LIB="$HOME/perllib/builder/share/perl5/:$HOME/perllib/demos/share/perl5/:$HOME/perllib/vault/share/perl5/:$HOME/perllib/nexus-core/share/perl5/:/home/mscheid/perllib/support/share/perl5/"
-export EDITOR='/usr/local/bin/vim'
+export EDITOR='/usr/bin/vim'
 
 PS1="\[$(tput setaf 2)\]\w\\100\h/=^_^= \[$(tput sgr0)\]"        
 PS2="\[$(tput setaf 2)\]\w\\100\h/=^_^= \[$(tput sgr0)\]"        
 
-TUX="mrs642@tux.cs.drexel.edu"
-LWC="selfforg@wellcomposed.net"
-
 PROMPT_DIRTRIM=2
 ARCHFLAGS="-arch x86_64"
 export DBIC_OVERWRITE_HELPER_METHODS_OK=1
+#osx
+alias nuke_audio = "sudo killall coreaudiod"
+alias nuke_postgres="brew services stop postgresql; rm /usr/local/var/postgres/postmaster.pid; launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; rm ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; brew services start postgresql;"
 
 #Misc
 alias l="ls $2"
@@ -34,7 +32,8 @@ alias composed="ssh selfforg@wellcomposed.net"
 alias serve_this="sudo chgrp -R www-data .&&sudo chmod -R g+s ."
 alias nuke_firewall="sudo systemctl stop firewalld && sudo systemctl disable firewalld && sudo systemctl mask firewalld"
 alias ports="netstat -tulpn"
-
+alias to_multi="git stash;git switch multi-provider;cd ../ui;git stash;git switch multi-provider;cd ../api;"
+alias to_main="git stash; rake db:migrate:down VERSION=20220211161732;rake db:migrate:down VERSION=20220210204743; rake db:migrate:down VERSION=20220209215738;cd ../ui;git stash;git switch main;cd ../api"
 
 #Build
 alias brm='sudo rm -rf `cat makeloc`&&rm -rf blib'
@@ -63,6 +62,8 @@ alias si="svn info"
 alias ss="svn switch"
 alias sii="svn info --show-item"
 
+alias grh="git reset --hard HEAD~1"
+alias grs="git reset --soft HEAD~1"
 alias ga="git add"
 alias ga="git add"
 alias gb="git branch"
@@ -82,14 +83,24 @@ alias gal="git add !!:1"
 alias gcl="git clean"
 alias gco="git checkout"
 alias gcp="git cherry-pick"
-alias gdf="git diff"
+alias gdf="git diff -b"
 alias sdf="svn diff -x -u"
 alias grl="git reflog"
 alias gsh="git show --raw"
 alias gst="git stash"
+alias gsp="git stash pop"
+alias gsw="git switch"
 function smiss(){
   svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm
 }
+
+#testing
+alias ter="bundle exec rails test"
+alias tee="npm run test"
+alias trs="cd ../api/&&rake testcafe_reset&&cd ../ui&&npm run test"
+alias tsr="bundle exec rails test -n $1"
+alias tse="npm run test -T $1"
+
 
 #perl
 alias pv="while read line ; do perl -c "$line"; done <<< $(svn status -q | sed "s/M\s*//";)"
@@ -97,6 +108,10 @@ alias pca='while read line ; do echo $line; perl -c "$line"; done'
 alias smf='svn status -q | sed "s/^\w\s*//";'
 
 #Ruby/Rails
+alias railsrs = "bin/spring stop;"
+alias rt="bundle exec rails test"
+alias rc="bundle exec rails console"
+alias ru="foreman start -f Procfile.dev"
 alias dbd="rake db:migrate:down"
 alias dbr="rake db:rollback"
 alias dbt="rake db:test:prepare"
@@ -217,14 +232,9 @@ export -f sem;
 export -f seu;
 export -f sereset;
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 COLUMNS=250
-
-export DEMOS_FRONT_END_REPO="/Users/mscheid/code/demos/1.1.2/front-end"
-export DEMOS_ASSET_SERVER="10.19.32.55:3000"
-export VAULT_FRONT_END_REPO="/Users/mscheid/code/vault-web-trunk"
-export VAULT_ASSET_SERVER="10.19.32.55:3000"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+

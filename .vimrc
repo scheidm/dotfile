@@ -1,5 +1,6 @@
 set shellcmdflag=-Iic
 set nocompatible " Disable vi-compatibility
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
 
 "VUNDLE CONFIG DO NOT CHANGE
 ""git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -27,7 +28,6 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'leshill/vim-json'
 Plugin 'pangloss/vim-javascript'
 Plugin 'twerth/ir_black'
-Plugin 'rdunklau/vim-perltidy'
 Plugin 'tyru/open-browser.vim'
 "Powerline setup
 Plugin 'Lokaltog/vim-powerline'
@@ -186,23 +186,6 @@ function! XX()
 endfunction
 nnoremap <Leader>4 :call XX()<cr>
 
-
-"define :Tidy command to run perltidy on visual selection || entire buffer"
-command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
-
-"run :Tidy on entire buffer and return cursor to (approximate) original position"
-fun DoTidy()
-    let l = line(".")
-    let c = col(".")
-    :Tidy
-    call cursor(l, c)
-endfun
-
-"shortcut for normal mode to run on entire buffer then return to current line"
-au Filetype perl nmap <F2> :call DoTidy()<CR>
-
-"shortcut for visual mode to run on the the current visual selection"
-au Filetype perl vmap <F2> :Tidy<CR>
 
 "
 "map compiler
