@@ -1,4 +1,5 @@
 export EDITOR='/usr/bin/vim'
+export TESTCAFE_TIMEOUT=200
 
 PS1="\[$(tput setaf 2)\]\w\\100\h/=^_^= \[$(tput sgr0)\]"        
 PS2="\[$(tput setaf 2)\]\w\\100\h/=^_^= \[$(tput sgr0)\]"        
@@ -30,10 +31,11 @@ alias serve="ruby -run -e httpd . -p 5000"
 alias puerh="ssh -t sinh@puerh 'tmuxinator start qtd'"
 alias composed="ssh selfforg@wellcomposed.net"
 alias serve_this="sudo chgrp -R www-data .&&sudo chmod -R g+s ."
+alias nuke_postgres="brew services stop postgresql; rm /usr/local/var/postgres/postmaster.pid; launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; rm ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; brew services start postgresql;"
 alias nuke_firewall="sudo systemctl stop firewalld && sudo systemctl disable firewalld && sudo systemctl mask firewalld"
 alias ports="netstat -tulpn"
-alias to_multi="git stash;git switch multi-provider;cd ../ui;git stash;git switch multi-provider;cd ../api;"
-alias to_main="git stash; rake db:migrate:down VERSION=20220211161732;rake db:migrate:down VERSION=20220210204743; rake db:migrate:down VERSION=20220209215738;cd ../ui;git stash;git switch main;cd ../api"
+alias tomain="rake db:migrate:down VERSION=20211103172628;git stash;git switch main;cd ../ui;git stash;git switch main;cd ../api;"
+alias todev="git stash;git switch multi-provider; rake db:migrate;cd ../ui;git stash;git switch multi-provider;cd ../api"
 
 #Build
 alias brm='sudo rm -rf `cat makeloc`&&rm -rf blib'

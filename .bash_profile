@@ -6,3 +6,4 @@ export PATH="/usr/local/opt/m4/bin:$PATH"
 export PATH=/opt/local/lib/postgresql90/bin/:$PATH
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+export PATH="/usr/local/opt/node@16/bin:$PATH"
