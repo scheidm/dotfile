@@ -1,5 +1,6 @@
 export EDITOR='/usr/bin/vim'
 export TESTCAFE_TIMEOUT=200
+export TWILIO_URL_BASE='goat-diverse-gar.ngrok-free.app'
 
 PS1="\[$(tput setaf 2)\]\w\\100\h/=^_^= \[$(tput sgr0)\]"        
 PS2="\[$(tput setaf 2)\]\w\\100\h/=^_^= \[$(tput sgr0)\]"        
@@ -8,8 +9,9 @@ PROMPT_DIRTRIM=2
 ARCHFLAGS="-arch x86_64"
 export DBIC_OVERWRITE_HELPER_METHODS_OK=1
 #osx
-alias nuke_audio = "sudo killall coreaudiod"
-alias nuke_postgres="brew services stop postgresql; rm /usr/local/var/postgres/postmaster.pid; launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; rm ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; brew services start postgresql;"
+alias nuke_audio="sudo killall coreaudiod"
+alias nuke_postgres="brew services stop postgresql@14; rm /usr/local/var/postgres/postmaster.pid; launchctl unload -w
+~/Library/LaunchAgents/homebrew.mxcl.postgresql@14.plist; rm ~/Library/LaunchAgents/homebrew.mxcl.postgresql@14.plist; brew services start postgresql@14;"
 
 #Misc
 alias l="ls $2"
@@ -29,24 +31,15 @@ alias dbx0="unset DBIC_TRACE"
 alias yumu="sudo ntpdate -u time.apple.gov&&sudo yum clean all&&sudo yum update -y"
 alias serve="ruby -run -e httpd . -p 5000"
 alias puerh="ssh -t sinh@puerh 'tmuxinator start qtd'"
-alias composed="ssh selfforg@wellcomposed.net"
 alias serve_this="sudo chgrp -R www-data .&&sudo chmod -R g+s ."
-alias nuke_postgres="brew services stop postgresql; rm /usr/local/var/postgres/postmaster.pid; launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; rm ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist; brew services start postgresql;"
 alias nuke_firewall="sudo systemctl stop firewalld && sudo systemctl disable firewalld && sudo systemctl mask firewalld"
 alias ports="netstat -tulpn"
-alias tomain="rake db:migrate:down VERSION=20211103172628;git stash;git switch main;cd ../ui;git stash;git switch main;cd ../api;"
-alias todev="git stash;git switch multi-provider; rake db:migrate;cd ../ui;git stash;git switch multi-provider;cd ../api"
 
 #Build
 alias brm='sudo rm -rf `cat makeloc`&&rm -rf blib'
 alias bmk='perl Makefile.PL PREFIX=`cat makeloc`'
 alias bmi='make && sudo make install'
 alias build-nuke="make clean;perl Makefile.PL;make manifest;vim MANIFEST"
-alias btg='read TAG_TARGET <tag-target;echo svn cp `svn info --show-item=url` http://subversion.int.bed.liquidpixels.net/$TAG_TARGET$1'
-
-#vault
-alias vrs="sudo mysql neuron_vault < sql/dropTables.sql&&echo 'drop 1' &&sudo mysql neuron_vault< sql/createDB.sql&&echo 'create 1' && sudo mysql nexus_core < ../tools/sql/dropDB.sql && echo 'drop 2' && sudo mysql nexus_core < /home/mscheid/migrations/bacon12-6-18.sql && echo 'create 2'&& sudo mysql nexus_core < ../tools/sql/upgradeBacon.sql&& echo 'upgrade complete' && sudo mysql nexus_core < ../tools/sql/automated-demos.sql && echo 'auto demos imported'&& sudo mysql nexus_core < ../tools/sql/automated-nexus-vault.sql && echo 'auto-nexus-vault imported' && sudo mysql nexus_core < ../tools/sql/automated-permissioning.sql && sudo mysql nexus_core < ../tools/sql/automated-nexus-support.sql && echo 'auto nexus-support imported' && sudo mysql nexus_core< ../tools/sql/vaultRoles.sql && echo 'roles created'"
-alias vmig="bmk&&bmi&&perl bin/migration.pl > phones.csv"
 
 #Docker
 alias d="docker $1"
@@ -63,9 +56,11 @@ alias sg="echo '.svn/*' >> .gitignore"
 alias si="svn info"
 alias ss="svn switch"
 alias sii="svn info --show-item"
+alias gclean="git log --branches --not --remotes --pretty=format:\"%h %as%x09%al%x09 %d% <(50,trunc)%s\""
 
 alias grh="git reset --hard HEAD~1"
 alias grs="git reset --soft HEAD~1"
+alias gun="git restore --staged $1; git restore $1"
 alias ga="git add"
 alias ga="git add"
 alias gb="git branch"
@@ -74,7 +69,7 @@ alias gd="git pull origin $1"
 alias gf="git fetch"
 alias gg="git grep $1"
 alias gl="git log"
-alias gm="git merge"
+alias gm="git merge --no-ff"
 alias gr="git reset"
 alias gu="git push origin $1"
 alias sc="svn commit -m $1"
@@ -82,6 +77,7 @@ alias sp="chown -R mscheid .svn"
 #ses = environment status, see top of file
 #sem = environment install, see top of file
 alias gal="git add !!:1"
+alias gbh="git branch -r | grep -v HEAD | while read b; do git log --color --format=\"%ci _%C(magenta) %cr^ %C(bold cyan)\$b%Creset^ %s^ %C(bold blue)%an%Creset %h\" \$b | head -n 1; done | sort -r | cut -d_ -f2- | sed 's;origin/;;g' | awk -F^ -vOFS=^ 'NR{\$3=substr(\$3,1,60)}1' | head -10 | column -t -s '^'"
 alias gcl="git clean"
 alias gco="git checkout"
 alias gcp="git cherry-pick"
@@ -92,6 +88,8 @@ alias gsh="git show --raw"
 alias gst="git stash"
 alias gsp="git stash pop"
 alias gsw="git switch"
+alias gdiverge="NAME=`git rev-parse HEAD`;git reset --hard HEAD~1; git pull origin; git cherry-pick $NAME"
+
 function smiss(){
   svn st | grep ^! | awk '{print " --force "$2}' | xargs svn rm
 }
@@ -110,7 +108,7 @@ alias pca='while read line ; do echo $line; perl -c "$line"; done'
 alias smf='svn status -q | sed "s/^\w\s*//";'
 
 #Ruby/Rails
-alias railsrs = "bin/spring stop;"
+alias railsrs="bin/spring stop;"
 alias rt="bundle exec rails test"
 alias rc="bundle exec rails console"
 alias ru="foreman start -f Procfile.dev"
@@ -219,6 +217,12 @@ done
 cd ..
 echo end report
 }
+function gpr(){
+  for mergedBranch in $(git for-each-ref --format '%(refname:short)' --merged HEAD refs/heads/)
+  do
+    git branch -d ${mergedBranch}
+  done
+}
 function sereset() { 
 cd $1
 for i in $(find -L . -maxdepth 1 -mindepth 1 -type d)
@@ -232,11 +236,18 @@ export -f ses;
 export -f seb;
 export -f sem;
 export -f seu;
+export -f gpr;
 export -f sereset;
 
 #export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/usr/local/opt/node@18/bin:$PATH"
+
 COLUMNS=250
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+
+# Created by `pipx` on 2024-06-12 16:29:04
+export PATH="$PATH:/Users/scheidm/.local/bin"
+if [ -f "/Users/scheidm/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/scheidm/.config/fabric/fabric-bootstrap.inc"; fi

@@ -1,7 +1,15 @@
 [user]
-	name = scheidm
-	email = scheidm@wellcomposed.net
+	name = Mark Scheid
+	email = mscheid@uwill.com
 [credential]
 	helper = cache --timeout=3600
 [core]
 	editor = vim
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[push]
+	autoSetupRemote = true
+	autoSetupRemote = true

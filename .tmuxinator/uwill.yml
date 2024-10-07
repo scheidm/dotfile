@@ -7,6 +7,8 @@ windows:
   - ui: cd ../ui
   - server: foreman start -f Procfile.dev
   - node: cd ../ui; npm run serve
+  - prod: cd ..;
+  - notebook: cd ~/btsync/wiki/notebook;g
 
 # Optional tmux socket
 # socket_name: foo

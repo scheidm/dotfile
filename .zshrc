@@ -11,6 +11,7 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$OPENSSL_PATH"
 
 # Place openssl@1.1 at the beginning of your PATH (preempt system libs)
 export PATH=$OPENSSL_PATH/bin:$PATH
+export PATH="$HOME/.rbenv/bin:$PATH"
 
 # Load rbenv
 eval "$(rbenv init -)"
@@ -19,3 +20,4 @@ eval "$(rbenv init -)"
 # rbenv install $LATEST_RUBY_VERSION
 export LATEST_RUBY_VERSION=$(rbenv install -l | grep -v - | tail -1)
 
+if [ -f "/Users/scheidm/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/scheidm/.config/fabric/fabric-bootstrap.inc"; fi
