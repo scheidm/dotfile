@@ -1,14 +1,15 @@
 # /Users/scheidm/.tmuxinator/uwill.yml
 
 name: uwill
-root: ~/code/uwill/api
+root: ~/code/
 windows:
-  - api: g
-  - ui: cd ../ui
-  - server: foreman start -f Procfile.dev
-  - node: cd ../ui; npm run serve
-  - prod: cd ..;
-  - notebook: cd ~/btsync/wiki/notebook;g
+  - api: cd uwill/api; git log
+  - ui: cd uwill/ui; git log
+  - server: cd uwill/api; foreman start -f Procfile.dev
+  - node: cd uwill/ui; npm run serve
+  - prod: cd uwill
+  - lops: cd lopsoflove; git log
+  - lserve: cd lopsoflove; bundle exec rails s
 
 # Optional tmux socket
 # socket_name: foo
